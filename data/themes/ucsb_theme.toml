@@ -1,0 +1,18 @@
+# Theme metadata
+name = "ucsb_theme"
+
+# Is theme light or dark?
+light = true
+
+# Primary
+primary = "#1c4b76"
+
+# Menu
+menu_primary = "#1c4b76"
+menu_text = "#ffd804"
+menu_text_active = "#fffdf3"
+menu_title = "#fffdf3"
+
+# Home sections
+home_section_odd = "rgb(255, 255, 255)"
+home_section_even = "rgb(247, 247, 247)"

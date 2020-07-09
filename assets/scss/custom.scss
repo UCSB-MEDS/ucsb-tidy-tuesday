@@ -1,0 +1,121 @@
+/*--- Custom CSS for UCSB Tidy Tuesday website ---*/
+
+/*--- Import fonts ---*/
+
+@import url('https://fonts.googleapis.com/css2?family=Flamenco&family=Muli:wght@300&display=swap');
+
+/*-------- NavBar --------*/
+.navbar {
+    height: 70px;
+    background: #696d7d;
+    box-shadow: 0 0.125rem 0.25rem 0 rgba(0,0,0,0.11);
+    font-size: 16.17px;
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    z-index: 1030;
+    padding: 0 1rem;
+    color: #faf3dd;
+}
+
+.navbar-light .navbar-brand {
+    font-family: 'Flamenco';
+    color: #8fc0a9;
+}
+
+.navbar-light .navbar-brand:hover, .navbar-light .navbar-brand:focus {
+    color: #c8d5b9;
+}
+
+.fa, .fas {
+    font-weight: 900;
+    color: #8fc0a9;
+}
+
+#navbar-main .main-menu-item ul li .nav-link {
+    color: #c8d5b9;
+    font-family: 'Muli';
+    background: #696d7d;
+}
+
+.navbar .navbar-nav .nav-link.active {
+    font-family: 'Muli';
+    font-weight: bold !important;
+    color: #c8d5b9 !important;
+}
+
+/*-------- Avatar title --------*/
+.portrait-title h2 {
+    font-size: 1.75em;
+    font-weight: 300;
+    color: lightseagreen;
+    margin: 20px 0 10px 0;
+    font-family: 'Flamenco';
+}
+/*-------- Home section color & body font --------*/
+
+.home-section {
+    padding: 110px 0 110px 0;
+        padding-top: 110px;
+    animation: intro 0.3s both;
+        animation-delay: 0s;
+    animation-delay: 0.15s;
+}
+
+/*--- Body font ---*/
+body {
+    font-family: 'Muli';
+    font-size: 1rem;
+    line-height: inherit;
+    color: inherit;
+    background-color: white;
+}
+
+/*--- Update title and header fonts ---*/
+
+h1 {
+  color: #68b0ab;
+  font-family: 'Flamenco', serif;
+  font-size: 18;
+}
+
+h2 {
+  color: #696d7d;
+  font-family: 'Muli', serif;
+  font-size: 16;
+}
+
+h3 {
+  color: #696d7d;
+  font-family: 'Muli', serif;
+  font-size: 14;
+}
+
+h4 {
+  color: #8fc0a9;
+  font-family: 'Muli', serif;
+  font-size: 12;
+}
+
+/*------- Hyperlinks -------*/
+
+a {
+    color: #68b0ab;
+}
+
+a:hover, a:focus {
+    color: #8fc0a9;
+}
+
+/*------- Post title -------*/
+a, h3.article-title a:hover {
+    color: #8fc0a9;
+    text-decoration: none;
+    transition: color 0.6s ease;
+}
+
+.article-title a {
+    color: #696d7d;
+    transition: color 0.6s ease;
+}
