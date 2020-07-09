@@ -1,7 +1,7 @@
 ---
 authors:
 - admin
-email: "ucsbtidytuesday"
+email: "ahorst@ucsb.edu"
 organizations:
 - name: UC Santa Barbara
   url: ""
