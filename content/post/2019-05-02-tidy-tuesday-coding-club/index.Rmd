@@ -2,7 +2,8 @@
 title: "Starting our UCSB #tidytuesday coding club"
 author: Allison Horst
 date: '2019-05-02'
-slug: tidytuesday
+subtitle: ''
+summary: 'How we started our TidyTuesday in-person coding club at UCSB.'
 categories:
   - community
   - champions
