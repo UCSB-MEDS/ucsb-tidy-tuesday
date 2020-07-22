@@ -13,7 +13,7 @@
     </image>
     
     <item>
-      <title>{forcats} for factors</title>
+      <title>{forcats} for factors by Allison Horst (Bren)</title>
       <link>/post/2020-07-21-tidy-tuesday-coding-club/</link>
       <pubDate>Tue, 21 Jul 2020 00:00:00 +0000</pubDate>
       <guid>/post/2020-07-21-tidy-tuesday-coding-club/</guid>
@@ -192,7 +192,7 @@ levels(sw_lump_min$species)&lt;/code&gt;&lt;/pre&gt;
     </item>
     
     <item>
-      <title>Meet the {GGally} package</title>
+      <title>Meet the {GGally} package by Allison Horst (Bren)</title>
       <link>/post/2020-07-07-tidy-tuesday-coding-club/</link>
       <pubDate>Tue, 07 Jul 2020 00:00:00 +0000</pubDate>
       <guid>/post/2020-07-07-tidy-tuesday-coding-club/</guid>
