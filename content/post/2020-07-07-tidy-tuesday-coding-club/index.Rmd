@@ -7,7 +7,7 @@ summary: '{GGally} for visual overviews of multivariate data'
 tags:
   - coding-demo
   - study-group
-  - forcats
+  - GGally
 ---
 
 ```{r setup, include=FALSE}
