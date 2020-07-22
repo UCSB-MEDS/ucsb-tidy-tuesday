@@ -1,0 +1,133 @@
+---
+title: '{forcats} for factors'
+author: Allison Horst
+date: '2020-07-21'
+slug: tidytuesday
+tags:
+  - coding-demo
+  - study-group
+  - forcats
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+```
+
+In this session, Allison did a few examples using functions in the [{forcats}](https://forcats.tidyverse.org/) package to reorder, relevel and lump together factor levels! 
+
+The functions shown in examples were: 
+
+- `fct_reorder()`: reorder factor levels by values of another variable
+- `fct_relevel()`: manually change factor levels
+- `fct_infreq()`: reorder factor levels by frequency of observations each level
+- `fct_lump()`: aggregate factor levels
+
+Here are several examples, using the `starwars` dataset in `dplyr`. Have more fun with factors, by letting {forcats} help! 
+
+### Making a simplified dataset for examples
+
+Starting from `starwars`, I create a subset with the *species* variable recast as a factor, only keeping variables *name*, *species*, and *height* and removing any cases (rows) where either *species* or *height* is missing (NA):
+
+```{r}
+# Attach the tidyverse
+library(tidyverse)
+
+# Check out starwars data
+glimpse(starwars)
+
+# Wrangling & simplifying
+sw_fct <- starwars %>% 
+  mutate(species = factor(species)) %>% 
+  select(name, species, height) %>% 
+  drop_na(species, height) 
+
+# Check the class and levels of species variable
+class(sw_fct$species)
+levels(sw_fct$species)
+
+```
+We can see from the `levels()` output above that the default order of factor levels is alphabetical. But often we want factor levels to be ordered by frequency, or value, or some other manual specification. 
+
+Below are several ways to update factor levels. 
+
+#### `fct_reorder()`: Reordering a factor by another variable 
+
+Example: I want to reorder species factor levels by the maximum value of height in each level. 
+
+```{r}
+
+by_max_height <- sw_fct %>% 
+  mutate(species = fct_reorder(species, height, max))
+
+levels(by_max_height$species) # Ta-da.
+
+# Showing that this lines up with the order if we find the maximum height for each level: 
+sw_fct %>% 
+  group_by(species) %>% 
+  summarize(max_height = max(height)) %>% 
+  arrange(max_height)
+```
+
+
+#### `fct_relevel()`: Reorder factor levels by hand
+
+Sometimes (e.g. when updating a reference level for a model) we'll want to manually set the order of factor levels. Use `fct_relevel()` to manually order levels. If you give the function a number of levels *less* than the total number of levels, all remaining are added in alphabetical order following the levels you've specified. 
+
+Example: Make the first three levels Ewok, Droid, and Wookie. 
+
+```{r}
+ewok_droid_wookiee <- sw_fct %>% 
+  mutate(species = fct_relevel(species, "Ewok","Droid","Wookiee"))
+
+# Verify the new level order in species
+levels(ewok_droid_wookiee$species)
+
+```
+
+#### `fct_infreq()`: Reordering a factor by the frequency of values
+
+If you want to reorder factor levels based on the *frequency of observations in factor levels*, use `fct_infreq()`. The level with the most observations will be (by default) the first level. 
+
+Example: reorder species factor levels based on the number of observations in each group. 
+
+```{r}
+
+# Reassign factor levels based on frequency of observations within each level
+sw_by_freq <- sw_fct %>% 
+  mutate(species = fct_infreq(species))
+
+# See the new levels
+levels(sw_by_freq$species)
+
+# Verify that this lines up with counts by species (shows first 5 rows)
+sw_fct %>% 
+  count(species) %>% 
+  arrange(-n) %>% 
+  head(5)
+```
+
+#### `fct_lump()` options: Collapsing the least/most frequent values of a factor into “other”
+
+There are several variations of `fct_lump()` (not all are included here). 
+
+`fct_lump_n()`: Lumps all levels together except the n most frequent. 
+
+```{r}
+# Lump together all groups except the three with the highest number of observations; everything else gets put in level "Other":
+sw_lump_n <- sw_fct %>% 
+  mutate(species = fct_lump_n(species, 3))
+
+levels(sw_lump_n$species)
+```
+
+`fct_lump_min()`: Lump together any levels that appear less than n times
+
+```{r}
+# Lump together any levels with LESS than 2 observations in the group into "Other":
+sw_lump_min <- sw_fct %>% 
+  mutate(species = fct_lump_min(species, 2))
+
+levels(sw_lump_min$species)
+```
+That's it for today! See more at [forcats.tidyverse.org](https://forcats.tidyverse.org/)! 

@@ -22,7 +22,7 @@ UCSB TidyTuesday is a weekly coding club where participants code, learn, and tea
 
 ### Where can you find us? 
 
-We meet: Tuesdays (usually 5pm - 7pm!)
+We meet: Tuesdays (usually ~5pm - 7pm)
 
 - October - May: weekly, at a different location on campus or nearby 
 - June - September: every other Tuesday (5pm - 7pm) *remotely* on Zoom

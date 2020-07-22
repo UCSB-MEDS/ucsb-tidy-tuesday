@@ -5,12 +5,191 @@
     <link>/tag/study-group/</link>
       <atom:link href="/tag/study-group/index.xml" rel="self" type="application/rss+xml" />
     <description>study-group</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Thu, 02 May 2019 00:00:00 +0000</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Tue, 21 Jul 2020 00:00:00 +0000</lastBuildDate>
     <image>
       <url>/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_512x512_fill_lanczos_center_2.png</url>
       <title>study-group</title>
       <link>/tag/study-group/</link>
     </image>
+    
+    <item>
+      <title>{forcats} for factors</title>
+      <link>/post/tidytuesday/</link>
+      <pubDate>Tue, 21 Jul 2020 00:00:00 +0000</pubDate>
+      <guid>/post/tidytuesday/</guid>
+      <description>
+
+
+&lt;p&gt;In this session, Allison did a few examples using functions in the &lt;a href=&#34;https://forcats.tidyverse.org/&#34;&gt;{forcats}&lt;/a&gt; package to reorder, relevel and lump together factor levels!&lt;/p&gt;
+&lt;p&gt;The functions shown in examples were:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;fct_reorder()&lt;/code&gt;: reorder factor levels by values of another variable&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;fct_relevel()&lt;/code&gt;: manually change factor levels&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;fct_infreq()&lt;/code&gt;: reorder factor levels by frequency of observations each level&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;fct_lump()&lt;/code&gt;: aggregate factor levels&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Here are several examples, using the &lt;code&gt;starwars&lt;/code&gt; dataset in &lt;code&gt;dplyr&lt;/code&gt;. Have more fun with factors, by letting {forcats} help!&lt;/p&gt;
+&lt;div id=&#34;making-a-simplified-dataset-for-examples&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Making a simplified dataset for examples&lt;/h3&gt;
+&lt;p&gt;Starting from &lt;code&gt;starwars&lt;/code&gt;, I create a subset with the &lt;em&gt;species&lt;/em&gt; variable recast as a factor, only keeping variables &lt;em&gt;name&lt;/em&gt;, &lt;em&gt;species&lt;/em&gt;, and &lt;em&gt;height&lt;/em&gt; and removing any cases (rows) where either &lt;em&gt;species&lt;/em&gt; or &lt;em&gt;height&lt;/em&gt; is missing (NA):&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Attach the tidyverse
+library(tidyverse)
+
+# Check out starwars data
+glimpse(starwars)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## Rows: 87
+## Columns: 14
+## $ name       &amp;lt;chr&amp;gt; &amp;quot;Luke Skywalker&amp;quot;, &amp;quot;C-3PO&amp;quot;, &amp;quot;R2-D2&amp;quot;, &amp;quot;Darth Vader&amp;quot;, &amp;quot;Leia O…
+## $ height     &amp;lt;int&amp;gt; 172, 167, 96, 202, 150, 178, 165, 97, 183, 182, 188, 180, …
+## $ mass       &amp;lt;dbl&amp;gt; 77.0, 75.0, 32.0, 136.0, 49.0, 120.0, 75.0, 32.0, 84.0, 77…
+## $ hair_color &amp;lt;chr&amp;gt; &amp;quot;blond&amp;quot;, NA, NA, &amp;quot;none&amp;quot;, &amp;quot;brown&amp;quot;, &amp;quot;brown, grey&amp;quot;, &amp;quot;brown&amp;quot;, …
+## $ skin_color &amp;lt;chr&amp;gt; &amp;quot;fair&amp;quot;, &amp;quot;gold&amp;quot;, &amp;quot;white, blue&amp;quot;, &amp;quot;white&amp;quot;, &amp;quot;light&amp;quot;, &amp;quot;light&amp;quot;, …
+## $ eye_color  &amp;lt;chr&amp;gt; &amp;quot;blue&amp;quot;, &amp;quot;yellow&amp;quot;, &amp;quot;red&amp;quot;, &amp;quot;yellow&amp;quot;, &amp;quot;brown&amp;quot;, &amp;quot;blue&amp;quot;, &amp;quot;blue&amp;quot;…
+## $ birth_year &amp;lt;dbl&amp;gt; 19.0, 112.0, 33.0, 41.9, 19.0, 52.0, 47.0, NA, 24.0, 57.0,…
+## $ sex        &amp;lt;chr&amp;gt; &amp;quot;male&amp;quot;, &amp;quot;none&amp;quot;, &amp;quot;none&amp;quot;, &amp;quot;male&amp;quot;, &amp;quot;female&amp;quot;, &amp;quot;male&amp;quot;, &amp;quot;female&amp;quot;…
+## $ gender     &amp;lt;chr&amp;gt; &amp;quot;masculine&amp;quot;, &amp;quot;masculine&amp;quot;, &amp;quot;masculine&amp;quot;, &amp;quot;masculine&amp;quot;, &amp;quot;femin…
+## $ homeworld  &amp;lt;chr&amp;gt; &amp;quot;Tatooine&amp;quot;, &amp;quot;Tatooine&amp;quot;, &amp;quot;Naboo&amp;quot;, &amp;quot;Tatooine&amp;quot;, &amp;quot;Alderaan&amp;quot;, &amp;quot;…
+## $ species    &amp;lt;chr&amp;gt; &amp;quot;Human&amp;quot;, &amp;quot;Droid&amp;quot;, &amp;quot;Droid&amp;quot;, &amp;quot;Human&amp;quot;, &amp;quot;Human&amp;quot;, &amp;quot;Human&amp;quot;, &amp;quot;Hum…
+## $ films      &amp;lt;list&amp;gt; [&amp;lt;&amp;quot;The Empire Strikes Back&amp;quot;, &amp;quot;Revenge of the Sith&amp;quot;, &amp;quot;Retu…
+## $ vehicles   &amp;lt;list&amp;gt; [&amp;lt;&amp;quot;Snowspeeder&amp;quot;, &amp;quot;Imperial Speeder Bike&amp;quot;&amp;gt;, &amp;lt;&amp;gt;, &amp;lt;&amp;gt;, &amp;lt;&amp;gt;, &amp;quot;I…
+## $ starships  &amp;lt;list&amp;gt; [&amp;lt;&amp;quot;X-wing&amp;quot;, &amp;quot;Imperial shuttle&amp;quot;&amp;gt;, &amp;lt;&amp;gt;, &amp;lt;&amp;gt;, &amp;quot;TIE Advanced x1…&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Wrangling &amp;amp; simplifying
+sw_fct &amp;lt;- starwars %&amp;gt;% 
+  mutate(species = factor(species)) %&amp;gt;% 
+  select(name, species, height) %&amp;gt;% 
+  drop_na(species, height) 
+
+# Check the class and levels of species variable
+class(sw_fct$species)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## [1] &amp;quot;factor&amp;quot;&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;levels(sw_fct$species)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##  [1] &amp;quot;Aleena&amp;quot;         &amp;quot;Besalisk&amp;quot;       &amp;quot;Cerean&amp;quot;         &amp;quot;Chagrian&amp;quot;      
+##  [5] &amp;quot;Clawdite&amp;quot;       &amp;quot;Droid&amp;quot;          &amp;quot;Dug&amp;quot;            &amp;quot;Ewok&amp;quot;          
+##  [9] &amp;quot;Geonosian&amp;quot;      &amp;quot;Gungan&amp;quot;         &amp;quot;Human&amp;quot;          &amp;quot;Hutt&amp;quot;          
+## [13] &amp;quot;Iktotchi&amp;quot;       &amp;quot;Kaleesh&amp;quot;        &amp;quot;Kaminoan&amp;quot;       &amp;quot;Kel Dor&amp;quot;       
+## [17] &amp;quot;Mirialan&amp;quot;       &amp;quot;Mon Calamari&amp;quot;   &amp;quot;Muun&amp;quot;           &amp;quot;Nautolan&amp;quot;      
+## [21] &amp;quot;Neimodian&amp;quot;      &amp;quot;Pau&amp;#39;an&amp;quot;         &amp;quot;Quermian&amp;quot;       &amp;quot;Rodian&amp;quot;        
+## [25] &amp;quot;Skakoan&amp;quot;        &amp;quot;Sullustan&amp;quot;      &amp;quot;Tholothian&amp;quot;     &amp;quot;Togruta&amp;quot;       
+## [29] &amp;quot;Toong&amp;quot;          &amp;quot;Toydarian&amp;quot;      &amp;quot;Trandoshan&amp;quot;     &amp;quot;Twi&amp;#39;lek&amp;quot;       
+## [33] &amp;quot;Vulptereen&amp;quot;     &amp;quot;Wookiee&amp;quot;        &amp;quot;Xexto&amp;quot;          &amp;quot;Yoda&amp;#39;s species&amp;quot;
+## [37] &amp;quot;Zabrak&amp;quot;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;We can see from the &lt;code&gt;levels()&lt;/code&gt; output above that the default order of factor levels is alphabetical. But often we want factor levels to be ordered by frequency, or value, or some other manual specification.&lt;/p&gt;
+&lt;p&gt;Below are several ways to update factor levels.&lt;/p&gt;
+&lt;div id=&#34;fct_reorder-reordering-a-factor-by-another-variable&#34; class=&#34;section level4&#34;&gt;
+&lt;h4&gt;&lt;code&gt;fct_reorder()&lt;/code&gt;: Reordering a factor by another variable&lt;/h4&gt;
+&lt;p&gt;Example: I want to reorder species factor levels by the maximum value of height in each level.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;by_max_height &amp;lt;- sw_fct %&amp;gt;% 
+  mutate(species = fct_reorder(species, height, max))
+
+levels(by_max_height$species) # Ta-da.&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##  [1] &amp;quot;Yoda&amp;#39;s species&amp;quot; &amp;quot;Aleena&amp;quot;         &amp;quot;Ewok&amp;quot;           &amp;quot;Vulptereen&amp;quot;    
+##  [5] &amp;quot;Dug&amp;quot;            &amp;quot;Xexto&amp;quot;          &amp;quot;Toydarian&amp;quot;      &amp;quot;Sullustan&amp;quot;     
+##  [9] &amp;quot;Toong&amp;quot;          &amp;quot;Clawdite&amp;quot;       &amp;quot;Mirialan&amp;quot;       &amp;quot;Rodian&amp;quot;        
+## [13] &amp;quot;Hutt&amp;quot;           &amp;quot;Zabrak&amp;quot;         &amp;quot;Togruta&amp;quot;        &amp;quot;Mon Calamari&amp;quot;  
+## [17] &amp;quot;Twi&amp;#39;lek&amp;quot;        &amp;quot;Geonosian&amp;quot;      &amp;quot;Tholothian&amp;quot;     &amp;quot;Iktotchi&amp;quot;      
+## [21] &amp;quot;Kel Dor&amp;quot;        &amp;quot;Trandoshan&amp;quot;     &amp;quot;Muun&amp;quot;           &amp;quot;Neimodian&amp;quot;     
+## [25] &amp;quot;Skakoan&amp;quot;        &amp;quot;Chagrian&amp;quot;       &amp;quot;Nautolan&amp;quot;       &amp;quot;Besalisk&amp;quot;      
+## [29] &amp;quot;Cerean&amp;quot;         &amp;quot;Droid&amp;quot;          &amp;quot;Human&amp;quot;          &amp;quot;Pau&amp;#39;an&amp;quot;        
+## [33] &amp;quot;Kaleesh&amp;quot;        &amp;quot;Gungan&amp;quot;         &amp;quot;Kaminoan&amp;quot;       &amp;quot;Wookiee&amp;quot;       
+## [37] &amp;quot;Quermian&amp;quot;&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Showing that this lines up with the order if we find the maximum height for each level: 
+sw_fct %&amp;gt;% 
+  group_by(species) %&amp;gt;% 
+  summarize(max_height = max(height)) %&amp;gt;% 
+  arrange(max_height)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## `summarise()` ungrouping output (override with `.groups` argument)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## # A tibble: 37 x 2
+##    species        max_height
+##    &amp;lt;fct&amp;gt;               &amp;lt;int&amp;gt;
+##  1 Yoda&amp;#39;s species         66
+##  2 Aleena                 79
+##  3 Ewok                   88
+##  4 Vulptereen             94
+##  5 Dug                   112
+##  6 Xexto                 122
+##  7 Toydarian             137
+##  8 Sullustan             160
+##  9 Toong                 163
+## 10 Clawdite              168
+## # … with 27 more rows&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div id=&#34;fct_relevel-reorder-factor-levels-by-hand&#34; class=&#34;section level4&#34;&gt;
+&lt;h4&gt;&lt;code&gt;fct_relevel()&lt;/code&gt;: Reorder factor levels by hand&lt;/h4&gt;
+&lt;p&gt;Sometimes (e.g. when updating a reference level for a model) we’ll want to manually set the order of factor levels. Use &lt;code&gt;fct_relevel()&lt;/code&gt; to manually order levels. If you give the function a number of levels &lt;em&gt;less&lt;/em&gt; than the total number of levels, all remaining are added in alphabetical order following the levels you’ve specified.&lt;/p&gt;
+&lt;p&gt;Example: Make the first three levels Ewok, Droid, and Wookie.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;ewok_droid_wookiee &amp;lt;- sw_fct %&amp;gt;% 
+  mutate(species = fct_relevel(species, &amp;quot;Ewok&amp;quot;,&amp;quot;Droid&amp;quot;,&amp;quot;Wookiee&amp;quot;))
+
+# Verify the new level order in species
+levels(ewok_droid_wookiee$species)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##  [1] &amp;quot;Ewok&amp;quot;           &amp;quot;Droid&amp;quot;          &amp;quot;Wookiee&amp;quot;        &amp;quot;Aleena&amp;quot;        
+##  [5] &amp;quot;Besalisk&amp;quot;       &amp;quot;Cerean&amp;quot;         &amp;quot;Chagrian&amp;quot;       &amp;quot;Clawdite&amp;quot;      
+##  [9] &amp;quot;Dug&amp;quot;            &amp;quot;Geonosian&amp;quot;      &amp;quot;Gungan&amp;quot;         &amp;quot;Human&amp;quot;         
+## [13] &amp;quot;Hutt&amp;quot;           &amp;quot;Iktotchi&amp;quot;       &amp;quot;Kaleesh&amp;quot;        &amp;quot;Kaminoan&amp;quot;      
+## [17] &amp;quot;Kel Dor&amp;quot;        &amp;quot;Mirialan&amp;quot;       &amp;quot;Mon Calamari&amp;quot;   &amp;quot;Muun&amp;quot;          
+## [21] &amp;quot;Nautolan&amp;quot;       &amp;quot;Neimodian&amp;quot;      &amp;quot;Pau&amp;#39;an&amp;quot;         &amp;quot;Quermian&amp;quot;      
+## [25] &amp;quot;Rodian&amp;quot;         &amp;quot;Skakoan&amp;quot;        &amp;quot;Sullustan&amp;quot;      &amp;quot;Tholothian&amp;quot;    
+## [29] &amp;quot;Togruta&amp;quot;        &amp;quot;Toong&amp;quot;          &amp;quot;Toydarian&amp;quot;      &amp;quot;Trandoshan&amp;quot;    
+## [33] &amp;quot;Twi&amp;#39;lek&amp;quot;        &amp;quot;Vulptereen&amp;quot;     &amp;quot;Xexto&amp;quot;          &amp;quot;Yoda&amp;#39;s species&amp;quot;
+## [37] &amp;quot;Zabrak&amp;quot;&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div id=&#34;fct_infreq-reordering-a-factor-by-the-frequency-of-values&#34; class=&#34;section level4&#34;&gt;
+&lt;h4&gt;&lt;code&gt;fct_infreq()&lt;/code&gt;: Reordering a factor by the frequency of values&lt;/h4&gt;
+&lt;p&gt;If you want to reorder factor levels based on the &lt;em&gt;frequency of observations in factor levels&lt;/em&gt;, use &lt;code&gt;fct_infreq()&lt;/code&gt;. The level with the most observations will be (by default) the first level.&lt;/p&gt;
+&lt;p&gt;Example: reorder species factor levels based on the number of observations in each group.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Reassign factor levels based on frequency of observations within each level
+sw_by_freq &amp;lt;- sw_fct %&amp;gt;% 
+  mutate(species = fct_infreq(species))
+
+# See the new levels
+levels(sw_by_freq$species)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##  [1] &amp;quot;Human&amp;quot;          &amp;quot;Droid&amp;quot;          &amp;quot;Gungan&amp;quot;         &amp;quot;Kaminoan&amp;quot;      
+##  [5] &amp;quot;Mirialan&amp;quot;       &amp;quot;Twi&amp;#39;lek&amp;quot;        &amp;quot;Wookiee&amp;quot;        &amp;quot;Zabrak&amp;quot;        
+##  [9] &amp;quot;Aleena&amp;quot;         &amp;quot;Besalisk&amp;quot;       &amp;quot;Cerean&amp;quot;         &amp;quot;Chagrian&amp;quot;      
+## [13] &amp;quot;Clawdite&amp;quot;       &amp;quot;Dug&amp;quot;            &amp;quot;Ewok&amp;quot;           &amp;quot;Geonosian&amp;quot;     
+## [17] &amp;quot;Hutt&amp;quot;           &amp;quot;Iktotchi&amp;quot;       &amp;quot;Kaleesh&amp;quot;        &amp;quot;Kel Dor&amp;quot;       
+## [21] &amp;quot;Mon Calamari&amp;quot;   &amp;quot;Muun&amp;quot;           &amp;quot;Nautolan&amp;quot;       &amp;quot;Neimodian&amp;quot;     
+## [25] &amp;quot;Pau&amp;#39;an&amp;quot;         &amp;quot;Quermian&amp;quot;       &amp;quot;Rodian&amp;quot;         &amp;quot;Skakoan&amp;quot;       
+## [29] &amp;quot;Sullustan&amp;quot;      &amp;quot;Tholothian&amp;quot;     &amp;quot;Togruta&amp;quot;        &amp;quot;Toong&amp;quot;         
+## [33] &amp;quot;Toydarian&amp;quot;      &amp;quot;Trandoshan&amp;quot;     &amp;quot;Vulptereen&amp;quot;     &amp;quot;Xexto&amp;quot;         
+## [37] &amp;quot;Yoda&amp;#39;s species&amp;quot;&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Verify that this lines up with counts by species (shows first 5 rows)
+sw_fct %&amp;gt;% 
+  count(species) %&amp;gt;% 
+  arrange(-n) %&amp;gt;% 
+  head(5)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## # A tibble: 5 x 2
+##   species      n
+##   &amp;lt;fct&amp;gt;    &amp;lt;int&amp;gt;
+## 1 Human       31
+## 2 Droid        5
+## 3 Gungan       3
+## 4 Kaminoan     2
+## 5 Mirialan     2&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div id=&#34;fct_lump-options-collapsing-the-leastmost-frequent-values-of-a-factor-into-other&#34; class=&#34;section level4&#34;&gt;
+&lt;h4&gt;&lt;code&gt;fct_lump()&lt;/code&gt; options: Collapsing the least/most frequent values of a factor into “other”&lt;/h4&gt;
+&lt;p&gt;There are several variations of &lt;code&gt;fct_lump()&lt;/code&gt; (not all are included here).&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;fct_lump_n()&lt;/code&gt;: Lumps all levels together except the n most frequent.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Lump together all groups except the three with the highest number of observations; everything else gets put in level &amp;quot;Other&amp;quot;:
+sw_lump_n &amp;lt;- sw_fct %&amp;gt;% 
+  mutate(species = fct_lump_n(species, 3))
+
+levels(sw_lump_n$species)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## [1] &amp;quot;Droid&amp;quot;  &amp;quot;Gungan&amp;quot; &amp;quot;Human&amp;quot;  &amp;quot;Other&amp;quot;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;code&gt;fct_lump_min()&lt;/code&gt;: Lump together any levels that appear less than n times&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Lump together any levels with LESS than 2 observations in the group into &amp;quot;Other&amp;quot;:
+sw_lump_min &amp;lt;- sw_fct %&amp;gt;% 
+  mutate(species = fct_lump_min(species, 2))
+
+levels(sw_lump_min$species)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## [1] &amp;quot;Droid&amp;quot;    &amp;quot;Gungan&amp;quot;   &amp;quot;Human&amp;quot;    &amp;quot;Kaminoan&amp;quot; &amp;quot;Mirialan&amp;quot; &amp;quot;Twi&amp;#39;lek&amp;quot;  &amp;quot;Wookiee&amp;quot; 
+## [8] &amp;quot;Zabrak&amp;quot;   &amp;quot;Other&amp;quot;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;That’s it for today! See more at &lt;a href=&#34;https://forcats.tidyverse.org/&#34;&gt;forcats.tidyverse.org&lt;/a&gt;!&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+</description>
+    </item>
     
     <item>
       <title>Starting our UCSB #tidytuesday coding club</title>
