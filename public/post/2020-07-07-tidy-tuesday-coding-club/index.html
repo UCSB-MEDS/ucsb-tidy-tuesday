@@ -596,25 +596,22 @@
   <div class="article-container">
 
     <div class="article-style">
-      <p>The delightful 
-<a href="https://www.rdocumentation.org/packages/GGally/versions/1.5.0" target="_blank" rel="noopener">{GGally}</a> package, by 
-<a href="http://schloerke.com/" target="_blank" rel="noopener">Barret Schloerke</a> and other contributors, makes it easier to explore relationships and patterns for multivariate data. In the following examples, we show several {GGally} functions to visualize your data using the 
-<a href="https://allisonhorst.github.io/palmerpenguins/" target="_blank" rel="noopener">{palmerpenguins}</a> package (install from GitHub for now &ndash; hopefully on CRAN soon).</p>
-<pre><code class="language-r">library(tidyverse)
+      
+
+
+<p>The delightful <a href="https://www.rdocumentation.org/packages/GGally/versions/1.5.0">{GGally}</a> package, by <a href="http://schloerke.com/">Barret Schloerke</a> and other contributors, makes it easier to explore relationships and patterns for multivariate data. In the following examples, we show several {GGally} functions to visualize your data using the <a href="https://allisonhorst.github.io/palmerpenguins/">{palmerpenguins}</a> package (install from GitHub for now – hopefully on CRAN soon).</p>
+<pre class="r"><code>library(tidyverse)
 library(palmerpenguins)
 library(skimr)
-library(GGally)
-</code></pre>
-<h2 id="1-check-out-the-penguins-data">1. Check out the penguins data!</h2>
-<p>First, some of our go-to ways to explore data, using the <strong>penguins</strong> object from {palmerpenguins}. The data were originally collected and published by 
-<a href="https://www.uaf.edu/cfos/people/faculty/detail/kristen-gorman.php" target="_blank" rel="noopener">Dr. Kristen Gorman</a> and the 
-<a href="https://pal.lternet.edu/" target="_blank" rel="noopener">Palmer Station LTER</a>. Structural size measurements for nesting adults of three penguin species (Adélie, Chinstrap and Gentoo) were recorded on islands in Palmer Archipelago, Antarctica, from 2007 - 2009.</p>
-<pre><code class="language-r"># Bring it up in a new tab
+library(GGally)</code></pre>
+<div id="check-out-the-penguins-data" class="section level2">
+<h2>1. Check out the penguins data!</h2>
+<p>First, some of our go-to ways to explore data, using the <strong>penguins</strong> object from {palmerpenguins}. The data were originally collected and published by <a href="https://www.uaf.edu/cfos/people/faculty/detail/kristen-gorman.php">Dr. Kristen Gorman</a> and the <a href="https://pal.lternet.edu/">Palmer Station LTER</a>. Structural size measurements for nesting adults of three penguin species (Adélie, Chinstrap and Gentoo) were recorded on islands in Palmer Archipelago, Antarctica, from 2007 - 2009.</p>
+<pre class="r"><code># Bring it up in a new tab
 # View(penguins)
 
 # Summarize it 
-summary(penguins)
-</code></pre>
+summary(penguins)</code></pre>
 <pre><code>##       species          island    bill_length_mm  bill_depth_mm  
 ##  Adelie   :152   Biscoe   :168   Min.   :32.10   Min.   :13.10  
 ##  Chinstrap: 68   Dream    :124   1st Qu.:39.23   1st Qu.:15.60  
@@ -622,19 +619,17 @@ summary(penguins)
 ##                                  Mean   :43.92   Mean   :17.15  
 ##                                  3rd Qu.:48.50   3rd Qu.:18.70  
 ##                                  Max.   :59.60   Max.   :21.50  
-##                                  NA's   :2       NA's   :2      
+##                                  NA&#39;s   :2       NA&#39;s   :2      
 ##  flipper_length_mm  body_mass_g       sex           year     
 ##  Min.   :172.0     Min.   :2700   female:165   Min.   :2007  
 ##  1st Qu.:190.0     1st Qu.:3550   male  :168   1st Qu.:2007  
-##  Median :197.0     Median :4050   NA's  : 11   Median :2008  
+##  Median :197.0     Median :4050   NA&#39;s  : 11   Median :2008  
 ##  Mean   :200.9     Mean   :4202                Mean   :2008  
 ##  3rd Qu.:213.0     3rd Qu.:4750                3rd Qu.:2009  
 ##  Max.   :231.0     Max.   :6300                Max.   :2009  
-##  NA's   :2         NA's   :2
-</code></pre>
-<pre><code class="language-r"># Glimpse it
-tibble::glimpse(penguins)
-</code></pre>
+##  NA&#39;s   :2         NA&#39;s   :2</code></pre>
+<pre class="r"><code># Glimpse it
+tibble::glimpse(penguins)</code></pre>
 <pre><code>## Rows: 344
 ## Columns: 8
 ## $ species           &lt;fct&gt; Adelie, Adelie, Adelie, Adelie, Adelie, Adelie, Ade…
@@ -644,53 +639,45 @@ tibble::glimpse(penguins)
 ## $ flipper_length_mm &lt;int&gt; 181, 186, 195, NA, 193, 190, 181, 195, 193, 190, 18…
 ## $ body_mass_g       &lt;int&gt; 3750, 3800, 3250, NA, 3450, 3650, 3625, 4675, 3475,…
 ## $ sex               &lt;fct&gt; male, female, female, NA, female, male, female, mal…
-## $ year              &lt;int&gt; 2007, 2007, 2007, 2007, 2007, 2007, 2007, 2007, 200…
-</code></pre>
-<pre><code class="language-r"># Skim it 
-skimr::skim(penguins)
-</code></pre>
-<p>Table: Data summary</p>
+## $ year              &lt;int&gt; 2007, 2007, 2007, 2007, 2007, 2007, 2007, 2007, 200…</code></pre>
+<pre class="r"><code># Skim it 
+skimr::skim(penguins)</code></pre>
 <table>
-<thead>
-<tr>
-<th align="left"></th>
-<th align="left"></th>
-</tr>
-</thead>
+<caption><span id="tab:unnamed-chunk-2">Table 1: </span>Data summary</caption>
 <tbody>
-<tr>
+<tr class="odd">
 <td align="left">Name</td>
 <td align="left">penguins</td>
 </tr>
-<tr>
+<tr class="even">
 <td align="left">Number of rows</td>
 <td align="left">344</td>
 </tr>
-<tr>
+<tr class="odd">
 <td align="left">Number of columns</td>
 <td align="left">8</td>
 </tr>
-<tr>
+<tr class="even">
 <td align="left">_______________________</td>
 <td align="left"></td>
 </tr>
-<tr>
+<tr class="odd">
 <td align="left">Column type frequency:</td>
 <td align="left"></td>
 </tr>
-<tr>
+<tr class="even">
 <td align="left">factor</td>
 <td align="left">3</td>
 </tr>
-<tr>
+<tr class="odd">
 <td align="left">numeric</td>
 <td align="left">5</td>
 </tr>
-<tr>
+<tr class="even">
 <td align="left">________________________</td>
 <td align="left"></td>
 </tr>
-<tr>
+<tr class="odd">
 <td align="left">Group variables</td>
 <td align="left">None</td>
 </tr>
@@ -699,7 +686,7 @@ skimr::skim(penguins)
 <p><strong>Variable type: factor</strong></p>
 <table>
 <thead>
-<tr>
+<tr class="header">
 <th align="left">skim_variable</th>
 <th align="right">n_missing</th>
 <th align="right">complete_rate</th>
@@ -709,7 +696,7 @@ skimr::skim(penguins)
 </tr>
 </thead>
 <tbody>
-<tr>
+<tr class="odd">
 <td align="left">species</td>
 <td align="right">0</td>
 <td align="right">1.00</td>
@@ -717,7 +704,7 @@ skimr::skim(penguins)
 <td align="right">3</td>
 <td align="left">Ade: 152, Gen: 124, Chi: 68</td>
 </tr>
-<tr>
+<tr class="even">
 <td align="left">island</td>
 <td align="right">0</td>
 <td align="right">1.00</td>
@@ -725,7 +712,7 @@ skimr::skim(penguins)
 <td align="right">3</td>
 <td align="left">Bis: 168, Dre: 124, Tor: 52</td>
 </tr>
-<tr>
+<tr class="odd">
 <td align="left">sex</td>
 <td align="right">11</td>
 <td align="right">0.97</td>
@@ -738,7 +725,7 @@ skimr::skim(penguins)
 <p><strong>Variable type: numeric</strong></p>
 <table>
 <thead>
-<tr>
+<tr class="header">
 <th align="left">skim_variable</th>
 <th align="right">n_missing</th>
 <th align="right">complete_rate</th>
@@ -753,7 +740,7 @@ skimr::skim(penguins)
 </tr>
 </thead>
 <tbody>
-<tr>
+<tr class="odd">
 <td align="left">bill_length_mm</td>
 <td align="right">2</td>
 <td align="right">0.99</td>
@@ -766,7 +753,7 @@ skimr::skim(penguins)
 <td align="right">59.6</td>
 <td align="left">▃▇▇▆▁</td>
 </tr>
-<tr>
+<tr class="even">
 <td align="left">bill_depth_mm</td>
 <td align="right">2</td>
 <td align="right">0.99</td>
@@ -779,7 +766,7 @@ skimr::skim(penguins)
 <td align="right">21.5</td>
 <td align="left">▅▅▇▇▂</td>
 </tr>
-<tr>
+<tr class="odd">
 <td align="left">flipper_length_mm</td>
 <td align="right">2</td>
 <td align="right">0.99</td>
@@ -792,7 +779,7 @@ skimr::skim(penguins)
 <td align="right">231.0</td>
 <td align="left">▂▇▃▅▂</td>
 </tr>
-<tr>
+<tr class="even">
 <td align="left">body_mass_g</td>
 <td align="right">2</td>
 <td align="right">0.99</td>
@@ -805,7 +792,7 @@ skimr::skim(penguins)
 <td align="right">6300.0</td>
 <td align="left">▃▇▆▃▂</td>
 </tr>
-<tr>
+<tr class="odd">
 <td align="left">year</td>
 <td align="right">0</td>
 <td align="right">1.00</td>
@@ -820,28 +807,30 @@ skimr::skim(penguins)
 </tr>
 </tbody>
 </table>
-<h2 id="2-visual-overview-of-relationships-with-ggally-package">2. Visual overview of relationships with {GGally} package</h2>
-<p>More on {GGally}: <a href="https://ggobi.github.io/ggally/">https://ggobi.github.io/ggally/</a></p>
-<p>Summary: &ldquo;GGally extends ggplot2 by adding several functions to reduce the complexity of combining geoms with transformed data. Some of these functions include a pairwise plot matrix, a scatterplot plot matrix, a parallel coordinates plot, a survival plot, and several functions to plot networks.&rdquo;</p>
-<h3 id="a-ggpairs-a-pair-plot">A. <code>ggpairs()</code>: a pair plot!</h3>
+</div>
+<div id="visual-overview-of-relationships-with-ggally-package" class="section level2">
+<h2>2. Visual overview of relationships with {GGally} package</h2>
+<p>More on {GGally}: <a href="https://ggobi.github.io/ggally/" class="uri">https://ggobi.github.io/ggally/</a></p>
+<p>Summary: “GGally extends ggplot2 by adding several functions to reduce the complexity of combining geoms with transformed data. Some of these functions include a pairwise plot matrix, a scatterplot plot matrix, a parallel coordinates plot, a survival plot, and several functions to plot networks.”</p>
+<div id="a.-ggpairs-a-pair-plot" class="section level3">
+<h3>A. <code>ggpairs()</code>: a pair plot!</h3>
 <p>Out of the box:</p>
-<pre><code class="language-r">ggpairs(penguins)
-</code></pre>
-<p><img src="index_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
-<p>That should make you go &ldquo;What.&rdquo; It&rsquo;s cool but a bit much. We can specify what we want in our pairs plot, and map color onto a variable to separate groups.</p>
-<pre><code class="language-r">penguins %&gt;% 
+<pre class="r"><code>ggpairs(penguins)</code></pre>
+<p><img src="/post/2020-07-07-tidy-tuesday-coding-club/index_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+<p>That should make you go “What.” It’s cool but a bit much. We can specify what we want in our pairs plot, and map color onto a variable to separate groups.</p>
+<pre class="r"><code>penguins %&gt;% 
   select(species, bill_length_mm:body_mass_g) %&gt;% 
-  ggpairs(aes(color = species))
-</code></pre>
-<p><img src="index_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
-<h3 id="b-ggbivariate-plot-outcome-variable-with-several-explanatory-variables">B. <code>ggbivariate()</code>: plot outcome variable with several explanatory variables</h3>
-<pre><code class="language-r">penguins %&gt;% 
+  ggpairs(aes(color = species))</code></pre>
+<p><img src="/post/2020-07-07-tidy-tuesday-coding-club/index_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+</div>
+<div id="b.-ggbivariate-plot-outcome-variable-with-several-explanatory-variables" class="section level3">
+<h3>B. <code>ggbivariate()</code>: plot outcome variable with several explanatory variables</h3>
+<pre class="r"><code>penguins %&gt;% 
   ggbivariate(outcome = &quot;body_mass_g&quot;, 
-              explanatory = c(&quot;species&quot;,&quot;sex&quot;, &quot;island&quot;,&quot;flipper_length_mm&quot;))
-</code></pre>
-<p><img src="index_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+              explanatory = c(&quot;species&quot;,&quot;sex&quot;, &quot;island&quot;,&quot;flipper_length_mm&quot;))</code></pre>
+<p><img src="/post/2020-07-07-tidy-tuesday-coding-club/index_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
 <p>An example with custom formatting:</p>
-<pre><code class="language-r">penguins %&gt;% 
+<pre class="r"><code>penguins %&gt;% 
   ggbivariate(outcome = &quot;species&quot;, 
               explanatory = c(&quot;flipper_length_mm&quot;, &quot;island&quot;, &quot;sex&quot;),
               rowbar_args = list(
@@ -851,24 +840,27 @@ skimr::skim(penguins)
     label_format = scales::label_percent(accurary = 1)
   )) +
   scale_fill_brewer(palette = 10) +
-  theme_minimal()
-</code></pre>
-<p><img src="index_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
-<h3 id="c-ggnostic-model-diagostics">C. <code>ggnostic()</code>: Model diagostics</h3>
-<pre><code class="language-r"># Make a model: 
+  theme_minimal()</code></pre>
+<p><img src="/post/2020-07-07-tidy-tuesday-coding-club/index_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+</div>
+<div id="c.-ggnostic-model-diagostics" class="section level3">
+<h3>C. <code>ggnostic()</code>: Model diagostics</h3>
+<pre class="r"><code># Make a model: 
 penguin_lm &lt;- lm(body_mass_g ~ flipper_length_mm + bill_length_mm + bill_depth_mm, data = penguins)
 
 # Look at the diagnostics! 
-ggnostic(penguin_lm)
-</code></pre>
-<p><img src="index_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
-<h3 id="d-ggtable-nicely-formatted-counts-tables">D. <code>ggtable()</code>: Nicely formatted counts tables</h3>
-<pre><code class="language-r"># Counts, for each species, tallied by island &amp; sex
+ggnostic(penguin_lm)</code></pre>
+<p><img src="/post/2020-07-07-tidy-tuesday-coding-club/index_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+</div>
+<div id="d.-ggtable-nicely-formatted-counts-tables" class="section level3">
+<h3>D. <code>ggtable()</code>: Nicely formatted counts tables</h3>
+<pre class="r"><code># Counts, for each species, tallied by island &amp; sex
 penguins %&gt;% 
-  ggtable(&quot;species&quot;, c(&quot;island&quot;,&quot;sex&quot;))
-</code></pre>
-<p><img src="index_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+  ggtable(&quot;species&quot;, c(&quot;island&quot;,&quot;sex&quot;))</code></pre>
+<p><img src="/post/2020-07-07-tidy-tuesday-coding-club/index_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
 <p>And much more! Check out {GGally} for more tools to explore and visualize your multivariate data!</p>
+</div>
+</div>
 
     </div>
 

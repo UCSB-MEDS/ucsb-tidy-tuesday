@@ -17,25 +17,22 @@
       <link>/post/2020-07-07-tidy-tuesday-coding-club/</link>
       <pubDate>Tue, 07 Jul 2020 00:00:00 +0000</pubDate>
       <guid>/post/2020-07-07-tidy-tuesday-coding-club/</guid>
-      <description>&lt;p&gt;The delightful 
-&lt;a href=&#34;https://www.rdocumentation.org/packages/GGally/versions/1.5.0&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;{GGally}&lt;/a&gt; package, by 
-&lt;a href=&#34;http://schloerke.com/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Barret Schloerke&lt;/a&gt; and other contributors, makes it easier to explore relationships and patterns for multivariate data. In the following examples, we show several {GGally} functions to visualize your data using the 
-&lt;a href=&#34;https://allisonhorst.github.io/palmerpenguins/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;{palmerpenguins}&lt;/a&gt; package (install from GitHub for now &amp;ndash; hopefully on CRAN soon).&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;library(tidyverse)
+      <description>
+
+
+&lt;p&gt;The delightful &lt;a href=&#34;https://www.rdocumentation.org/packages/GGally/versions/1.5.0&#34;&gt;{GGally}&lt;/a&gt; package, by &lt;a href=&#34;http://schloerke.com/&#34;&gt;Barret Schloerke&lt;/a&gt; and other contributors, makes it easier to explore relationships and patterns for multivariate data. In the following examples, we show several {GGally} functions to visualize your data using the &lt;a href=&#34;https://allisonhorst.github.io/palmerpenguins/&#34;&gt;{palmerpenguins}&lt;/a&gt; package (install from GitHub for now – hopefully on CRAN soon).&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(tidyverse)
 library(palmerpenguins)
 library(skimr)
-library(GGally)
-&lt;/code&gt;&lt;/pre&gt;
-&lt;h2 id=&#34;1-check-out-the-penguins-data&#34;&gt;1. Check out the penguins data!&lt;/h2&gt;
-&lt;p&gt;First, some of our go-to ways to explore data, using the &lt;strong&gt;penguins&lt;/strong&gt; object from {palmerpenguins}. The data were originally collected and published by 
-&lt;a href=&#34;https://www.uaf.edu/cfos/people/faculty/detail/kristen-gorman.php&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Dr. Kristen Gorman&lt;/a&gt; and the 
-&lt;a href=&#34;https://pal.lternet.edu/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Palmer Station LTER&lt;/a&gt;. Structural size measurements for nesting adults of three penguin species (Adélie, Chinstrap and Gentoo) were recorded on islands in Palmer Archipelago, Antarctica, from 2007 - 2009.&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;# Bring it up in a new tab
+library(GGally)&lt;/code&gt;&lt;/pre&gt;
+&lt;div id=&#34;check-out-the-penguins-data&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;1. Check out the penguins data!&lt;/h2&gt;
+&lt;p&gt;First, some of our go-to ways to explore data, using the &lt;strong&gt;penguins&lt;/strong&gt; object from {palmerpenguins}. The data were originally collected and published by &lt;a href=&#34;https://www.uaf.edu/cfos/people/faculty/detail/kristen-gorman.php&#34;&gt;Dr. Kristen Gorman&lt;/a&gt; and the &lt;a href=&#34;https://pal.lternet.edu/&#34;&gt;Palmer Station LTER&lt;/a&gt;. Structural size measurements for nesting adults of three penguin species (Adélie, Chinstrap and Gentoo) were recorded on islands in Palmer Archipelago, Antarctica, from 2007 - 2009.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Bring it up in a new tab
 # View(penguins)
 
 # Summarize it 
-summary(penguins)
-&lt;/code&gt;&lt;/pre&gt;
+summary(penguins)&lt;/code&gt;&lt;/pre&gt;
 &lt;pre&gt;&lt;code&gt;##       species          island    bill_length_mm  bill_depth_mm  
 ##  Adelie   :152   Biscoe   :168   Min.   :32.10   Min.   :13.10  
 ##  Chinstrap: 68   Dream    :124   1st Qu.:39.23   1st Qu.:15.60  
@@ -43,19 +40,17 @@ summary(penguins)
 ##                                  Mean   :43.92   Mean   :17.15  
 ##                                  3rd Qu.:48.50   3rd Qu.:18.70  
 ##                                  Max.   :59.60   Max.   :21.50  
-##                                  NA&#39;s   :2       NA&#39;s   :2      
+##                                  NA&amp;#39;s   :2       NA&amp;#39;s   :2      
 ##  flipper_length_mm  body_mass_g       sex           year     
 ##  Min.   :172.0     Min.   :2700   female:165   Min.   :2007  
 ##  1st Qu.:190.0     1st Qu.:3550   male  :168   1st Qu.:2007  
-##  Median :197.0     Median :4050   NA&#39;s  : 11   Median :2008  
+##  Median :197.0     Median :4050   NA&amp;#39;s  : 11   Median :2008  
 ##  Mean   :200.9     Mean   :4202                Mean   :2008  
 ##  3rd Qu.:213.0     3rd Qu.:4750                3rd Qu.:2009  
 ##  Max.   :231.0     Max.   :6300                Max.   :2009  
-##  NA&#39;s   :2         NA&#39;s   :2
-&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;# Glimpse it
-tibble::glimpse(penguins)
-&lt;/code&gt;&lt;/pre&gt;
+##  NA&amp;#39;s   :2         NA&amp;#39;s   :2&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Glimpse it
+tibble::glimpse(penguins)&lt;/code&gt;&lt;/pre&gt;
 &lt;pre&gt;&lt;code&gt;## Rows: 344
 ## Columns: 8
 ## $ species           &amp;lt;fct&amp;gt; Adelie, Adelie, Adelie, Adelie, Adelie, Adelie, Ade…
@@ -65,53 +60,45 @@ tibble::glimpse(penguins)
 ## $ flipper_length_mm &amp;lt;int&amp;gt; 181, 186, 195, NA, 193, 190, 181, 195, 193, 190, 18…
 ## $ body_mass_g       &amp;lt;int&amp;gt; 3750, 3800, 3250, NA, 3450, 3650, 3625, 4675, 3475,…
 ## $ sex               &amp;lt;fct&amp;gt; male, female, female, NA, female, male, female, mal…
-## $ year              &amp;lt;int&amp;gt; 2007, 2007, 2007, 2007, 2007, 2007, 2007, 2007, 200…
-&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;# Skim it 
-skimr::skim(penguins)
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Table: Data summary&lt;/p&gt;
+## $ year              &amp;lt;int&amp;gt; 2007, 2007, 2007, 2007, 2007, 2007, 2007, 2007, 200…&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Skim it 
+skimr::skim(penguins)&lt;/code&gt;&lt;/pre&gt;
 &lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th align=&#34;left&#34;&gt;&lt;/th&gt;
-&lt;th align=&#34;left&#34;&gt;&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
+&lt;caption&gt;&lt;span id=&#34;tab:unnamed-chunk-2&#34;&gt;Table 1: &lt;/span&gt;Data summary&lt;/caption&gt;
 &lt;tbody&gt;
-&lt;tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
 &lt;td align=&#34;left&#34;&gt;Name&lt;/td&gt;
 &lt;td align=&#34;left&#34;&gt;penguins&lt;/td&gt;
 &lt;/tr&gt;
-&lt;tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
 &lt;td align=&#34;left&#34;&gt;Number of rows&lt;/td&gt;
 &lt;td align=&#34;left&#34;&gt;344&lt;/td&gt;
 &lt;/tr&gt;
-&lt;tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
 &lt;td align=&#34;left&#34;&gt;Number of columns&lt;/td&gt;
 &lt;td align=&#34;left&#34;&gt;8&lt;/td&gt;
 &lt;/tr&gt;
-&lt;tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
 &lt;td align=&#34;left&#34;&gt;_______________________&lt;/td&gt;
 &lt;td align=&#34;left&#34;&gt;&lt;/td&gt;
 &lt;/tr&gt;
-&lt;tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
 &lt;td align=&#34;left&#34;&gt;Column type frequency:&lt;/td&gt;
 &lt;td align=&#34;left&#34;&gt;&lt;/td&gt;
 &lt;/tr&gt;
-&lt;tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
 &lt;td align=&#34;left&#34;&gt;factor&lt;/td&gt;
 &lt;td align=&#34;left&#34;&gt;3&lt;/td&gt;
 &lt;/tr&gt;
-&lt;tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
 &lt;td align=&#34;left&#34;&gt;numeric&lt;/td&gt;
 &lt;td align=&#34;left&#34;&gt;5&lt;/td&gt;
 &lt;/tr&gt;
-&lt;tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
 &lt;td align=&#34;left&#34;&gt;________________________&lt;/td&gt;
 &lt;td align=&#34;left&#34;&gt;&lt;/td&gt;
 &lt;/tr&gt;
-&lt;tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
 &lt;td align=&#34;left&#34;&gt;Group variables&lt;/td&gt;
 &lt;td align=&#34;left&#34;&gt;None&lt;/td&gt;
 &lt;/tr&gt;
@@ -120,7 +107,7 @@ skimr::skim(penguins)
 &lt;p&gt;&lt;strong&gt;Variable type: factor&lt;/strong&gt;&lt;/p&gt;
 &lt;table&gt;
 &lt;thead&gt;
-&lt;tr&gt;
+&lt;tr class=&#34;header&#34;&gt;
 &lt;th align=&#34;left&#34;&gt;skim_variable&lt;/th&gt;
 &lt;th align=&#34;right&#34;&gt;n_missing&lt;/th&gt;
 &lt;th align=&#34;right&#34;&gt;complete_rate&lt;/th&gt;
@@ -130,7 +117,7 @@ skimr::skim(penguins)
 &lt;/tr&gt;
 &lt;/thead&gt;
 &lt;tbody&gt;
-&lt;tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
 &lt;td align=&#34;left&#34;&gt;species&lt;/td&gt;
 &lt;td align=&#34;right&#34;&gt;0&lt;/td&gt;
 &lt;td align=&#34;right&#34;&gt;1.00&lt;/td&gt;
@@ -138,7 +125,7 @@ skimr::skim(penguins)
 &lt;td align=&#34;right&#34;&gt;3&lt;/td&gt;
 &lt;td align=&#34;left&#34;&gt;Ade: 152, Gen: 124, Chi: 68&lt;/td&gt;
 &lt;/tr&gt;
-&lt;tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
 &lt;td align=&#34;left&#34;&gt;island&lt;/td&gt;
 &lt;td align=&#34;right&#34;&gt;0&lt;/td&gt;
 &lt;td align=&#34;right&#34;&gt;1.00&lt;/td&gt;
@@ -146,7 +133,7 @@ skimr::skim(penguins)
 &lt;td align=&#34;right&#34;&gt;3&lt;/td&gt;
 &lt;td align=&#34;left&#34;&gt;Bis: 168, Dre: 124, Tor: 52&lt;/td&gt;
 &lt;/tr&gt;
-&lt;tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
 &lt;td align=&#34;left&#34;&gt;sex&lt;/td&gt;
 &lt;td align=&#34;right&#34;&gt;11&lt;/td&gt;
 &lt;td align=&#34;right&#34;&gt;0.97&lt;/td&gt;
@@ -159,7 +146,7 @@ skimr::skim(penguins)
 &lt;p&gt;&lt;strong&gt;Variable type: numeric&lt;/strong&gt;&lt;/p&gt;
 &lt;table&gt;
 &lt;thead&gt;
-&lt;tr&gt;
+&lt;tr class=&#34;header&#34;&gt;
 &lt;th align=&#34;left&#34;&gt;skim_variable&lt;/th&gt;
 &lt;th align=&#34;right&#34;&gt;n_missing&lt;/th&gt;
 &lt;th align=&#34;right&#34;&gt;complete_rate&lt;/th&gt;
@@ -174,7 +161,7 @@ skimr::skim(penguins)
 &lt;/tr&gt;
 &lt;/thead&gt;
 &lt;tbody&gt;
-&lt;tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
 &lt;td align=&#34;left&#34;&gt;bill_length_mm&lt;/td&gt;
 &lt;td align=&#34;right&#34;&gt;2&lt;/td&gt;
 &lt;td align=&#34;right&#34;&gt;0.99&lt;/td&gt;
@@ -187,7 +174,7 @@ skimr::skim(penguins)
 &lt;td align=&#34;right&#34;&gt;59.6&lt;/td&gt;
 &lt;td align=&#34;left&#34;&gt;▃▇▇▆▁&lt;/td&gt;
 &lt;/tr&gt;
-&lt;tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
 &lt;td align=&#34;left&#34;&gt;bill_depth_mm&lt;/td&gt;
 &lt;td align=&#34;right&#34;&gt;2&lt;/td&gt;
 &lt;td align=&#34;right&#34;&gt;0.99&lt;/td&gt;
@@ -200,7 +187,7 @@ skimr::skim(penguins)
 &lt;td align=&#34;right&#34;&gt;21.5&lt;/td&gt;
 &lt;td align=&#34;left&#34;&gt;▅▅▇▇▂&lt;/td&gt;
 &lt;/tr&gt;
-&lt;tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
 &lt;td align=&#34;left&#34;&gt;flipper_length_mm&lt;/td&gt;
 &lt;td align=&#34;right&#34;&gt;2&lt;/td&gt;
 &lt;td align=&#34;right&#34;&gt;0.99&lt;/td&gt;
@@ -213,7 +200,7 @@ skimr::skim(penguins)
 &lt;td align=&#34;right&#34;&gt;231.0&lt;/td&gt;
 &lt;td align=&#34;left&#34;&gt;▂▇▃▅▂&lt;/td&gt;
 &lt;/tr&gt;
-&lt;tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
 &lt;td align=&#34;left&#34;&gt;body_mass_g&lt;/td&gt;
 &lt;td align=&#34;right&#34;&gt;2&lt;/td&gt;
 &lt;td align=&#34;right&#34;&gt;0.99&lt;/td&gt;
@@ -226,7 +213,7 @@ skimr::skim(penguins)
 &lt;td align=&#34;right&#34;&gt;6300.0&lt;/td&gt;
 &lt;td align=&#34;left&#34;&gt;▃▇▆▃▂&lt;/td&gt;
 &lt;/tr&gt;
-&lt;tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
 &lt;td align=&#34;left&#34;&gt;year&lt;/td&gt;
 &lt;td align=&#34;right&#34;&gt;0&lt;/td&gt;
 &lt;td align=&#34;right&#34;&gt;1.00&lt;/td&gt;
@@ -241,28 +228,30 @@ skimr::skim(penguins)
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
-&lt;h2 id=&#34;2-visual-overview-of-relationships-with-ggally-package&#34;&gt;2. Visual overview of relationships with {GGally} package&lt;/h2&gt;
-&lt;p&gt;More on {GGally}: &lt;a href=&#34;https://ggobi.github.io/ggally/&#34;&gt;https://ggobi.github.io/ggally/&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;Summary: &amp;ldquo;GGally extends ggplot2 by adding several functions to reduce the complexity of combining geoms with transformed data. Some of these functions include a pairwise plot matrix, a scatterplot plot matrix, a parallel coordinates plot, a survival plot, and several functions to plot networks.&amp;rdquo;&lt;/p&gt;
-&lt;h3 id=&#34;a-ggpairs-a-pair-plot&#34;&gt;A. &lt;code&gt;ggpairs()&lt;/code&gt;: a pair plot!&lt;/h3&gt;
+&lt;/div&gt;
+&lt;div id=&#34;visual-overview-of-relationships-with-ggally-package&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;2. Visual overview of relationships with {GGally} package&lt;/h2&gt;
+&lt;p&gt;More on {GGally}: &lt;a href=&#34;https://ggobi.github.io/ggally/&#34; class=&#34;uri&#34;&gt;https://ggobi.github.io/ggally/&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Summary: “GGally extends ggplot2 by adding several functions to reduce the complexity of combining geoms with transformed data. Some of these functions include a pairwise plot matrix, a scatterplot plot matrix, a parallel coordinates plot, a survival plot, and several functions to plot networks.”&lt;/p&gt;
+&lt;div id=&#34;a.-ggpairs-a-pair-plot&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;A. &lt;code&gt;ggpairs()&lt;/code&gt;: a pair plot!&lt;/h3&gt;
 &lt;p&gt;Out of the box:&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;ggpairs(penguins)
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;index_files/figure-html/unnamed-chunk-3-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
-&lt;p&gt;That should make you go &amp;ldquo;What.&amp;rdquo; It&amp;rsquo;s cool but a bit much. We can specify what we want in our pairs plot, and map color onto a variable to separate groups.&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;penguins %&amp;gt;% 
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;ggpairs(penguins)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/2020-07-07-tidy-tuesday-coding-club/index_files/figure-html/unnamed-chunk-3-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;That should make you go “What.” It’s cool but a bit much. We can specify what we want in our pairs plot, and map color onto a variable to separate groups.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;penguins %&amp;gt;% 
   select(species, bill_length_mm:body_mass_g) %&amp;gt;% 
-  ggpairs(aes(color = species))
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;index_files/figure-html/unnamed-chunk-4-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
-&lt;h3 id=&#34;b-ggbivariate-plot-outcome-variable-with-several-explanatory-variables&#34;&gt;B. &lt;code&gt;ggbivariate()&lt;/code&gt;: plot outcome variable with several explanatory variables&lt;/h3&gt;
-&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;penguins %&amp;gt;% 
+  ggpairs(aes(color = species))&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/2020-07-07-tidy-tuesday-coding-club/index_files/figure-html/unnamed-chunk-4-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;b.-ggbivariate-plot-outcome-variable-with-several-explanatory-variables&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;B. &lt;code&gt;ggbivariate()&lt;/code&gt;: plot outcome variable with several explanatory variables&lt;/h3&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;penguins %&amp;gt;% 
   ggbivariate(outcome = &amp;quot;body_mass_g&amp;quot;, 
-              explanatory = c(&amp;quot;species&amp;quot;,&amp;quot;sex&amp;quot;, &amp;quot;island&amp;quot;,&amp;quot;flipper_length_mm&amp;quot;))
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;index_files/figure-html/unnamed-chunk-5-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+              explanatory = c(&amp;quot;species&amp;quot;,&amp;quot;sex&amp;quot;, &amp;quot;island&amp;quot;,&amp;quot;flipper_length_mm&amp;quot;))&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/2020-07-07-tidy-tuesday-coding-club/index_files/figure-html/unnamed-chunk-5-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;An example with custom formatting:&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;penguins %&amp;gt;% 
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;penguins %&amp;gt;% 
   ggbivariate(outcome = &amp;quot;species&amp;quot;, 
               explanatory = c(&amp;quot;flipper_length_mm&amp;quot;, &amp;quot;island&amp;quot;, &amp;quot;sex&amp;quot;),
               rowbar_args = list(
@@ -272,24 +261,27 @@ skimr::skim(penguins)
     label_format = scales::label_percent(accurary = 1)
   )) +
   scale_fill_brewer(palette = 10) +
-  theme_minimal()
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;index_files/figure-html/unnamed-chunk-6-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
-&lt;h3 id=&#34;c-ggnostic-model-diagostics&#34;&gt;C. &lt;code&gt;ggnostic()&lt;/code&gt;: Model diagostics&lt;/h3&gt;
-&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;# Make a model: 
+  theme_minimal()&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/2020-07-07-tidy-tuesday-coding-club/index_files/figure-html/unnamed-chunk-6-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;c.-ggnostic-model-diagostics&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;C. &lt;code&gt;ggnostic()&lt;/code&gt;: Model diagostics&lt;/h3&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Make a model: 
 penguin_lm &amp;lt;- lm(body_mass_g ~ flipper_length_mm + bill_length_mm + bill_depth_mm, data = penguins)
 
 # Look at the diagnostics! 
-ggnostic(penguin_lm)
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;index_files/figure-html/unnamed-chunk-7-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
-&lt;h3 id=&#34;d-ggtable-nicely-formatted-counts-tables&#34;&gt;D. &lt;code&gt;ggtable()&lt;/code&gt;: Nicely formatted counts tables&lt;/h3&gt;
-&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;# Counts, for each species, tallied by island &amp;amp; sex
+ggnostic(penguin_lm)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/2020-07-07-tidy-tuesday-coding-club/index_files/figure-html/unnamed-chunk-7-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;d.-ggtable-nicely-formatted-counts-tables&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;D. &lt;code&gt;ggtable()&lt;/code&gt;: Nicely formatted counts tables&lt;/h3&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Counts, for each species, tallied by island &amp;amp; sex
 penguins %&amp;gt;% 
-  ggtable(&amp;quot;species&amp;quot;, c(&amp;quot;island&amp;quot;,&amp;quot;sex&amp;quot;))
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;index_files/figure-html/unnamed-chunk-8-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+  ggtable(&amp;quot;species&amp;quot;, c(&amp;quot;island&amp;quot;,&amp;quot;sex&amp;quot;))&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/2020-07-07-tidy-tuesday-coding-club/index_files/figure-html/unnamed-chunk-8-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;And much more! Check out {GGally} for more tools to explore and visualize your multivariate data!&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
 </description>
     </item>
     
