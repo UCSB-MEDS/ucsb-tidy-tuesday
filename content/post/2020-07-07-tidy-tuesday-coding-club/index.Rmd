@@ -1,0 +1,112 @@
+---
+title: 'Meet the {GGally} package'
+author: Allison Horst
+date: '2020-07-07'
+subtitle: ''
+summary: '{GGally} for visual overviews of multivariate data'
+tags:
+  - coding-demo
+  - study-group
+  - forcats
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
+library(tidyverse)
+library(GGally)
+library(palmerpenguins)
+library(skimr)
+```
+
+The delightful [{GGally}](https://www.rdocumentation.org/packages/GGally/versions/1.5.0) package, by [Barret Schloerke](http://schloerke.com/) and other contributors, makes it easier to explore relationships and patterns for multivariate data. In the following examples, we show several {GGally} functions to visualize your data using the [{palmerpenguins}](https://allisonhorst.github.io/palmerpenguins/) package (install from GitHub for now -- hopefully on CRAN soon). 
+
+```{r, eval = FALSE}
+library(tidyverse)
+library(palmerpenguins)
+library(skimr)
+library(GGally)
+```
+
+## 1. Check out the penguins data! 
+
+First, some of our go-to ways to explore data, using the **penguins** object from {palmerpenguins}. The data were originally collected and published by [Dr. Kristen Gorman](https://www.uaf.edu/cfos/people/faculty/detail/kristen-gorman.php) and the [Palmer Station LTER](https://pal.lternet.edu/). Structural size measurements for nesting adults of three penguin species (Adélie, Chinstrap and Gentoo) were recorded on islands in Palmer Archipelago, Antarctica, from 2007 - 2009. 
+
+```{r}
+# Bring it up in a new tab
+# View(penguins)
+
+# Summarize it 
+summary(penguins)
+
+# Glimpse it
+tibble::glimpse(penguins)
+
+# Skim it 
+skimr::skim(penguins)
+```
+
+## 2. Visual overview of relationships with {GGally} package
+
+More on {GGally}: https://ggobi.github.io/ggally/
+
+Summary: "GGally extends ggplot2 by adding several functions to reduce the complexity of combining geoms with transformed data. Some of these functions include a pairwise plot matrix, a scatterplot plot matrix, a parallel coordinates plot, a survival plot, and several functions to plot networks."
+
+### A. `ggpairs()`: a pair plot!
+
+Out of the box: 
+
+```{r}
+ggpairs(penguins)
+```
+
+That should make you go "What." It's cool but a bit much. We can specify what we want in our pairs plot, and map color onto a variable to separate groups.
+
+```{r}
+penguins %>% 
+  select(species, bill_length_mm:body_mass_g) %>% 
+  ggpairs(aes(color = species))
+```
+
+### B. `ggbivariate()`: plot outcome variable with several explanatory variables
+
+```{r}
+penguins %>% 
+  ggbivariate(outcome = "body_mass_g", 
+              explanatory = c("species","sex", "island","flipper_length_mm"))
+```
+
+An example with custom formatting: 
+
+```{r}
+penguins %>% 
+  ggbivariate(outcome = "species", 
+              explanatory = c("flipper_length_mm", "island", "sex"),
+              rowbar_args = list(
+    colour = "purple",
+    size = 4,
+    fontface = "bold",
+    label_format = scales::label_percent(accurary = 1)
+  )) +
+  scale_fill_brewer(palette = 10) +
+  theme_minimal()
+```
+
+### C. `ggnostic()`: Model diagostics
+
+```{r}
+# Make a model: 
+penguin_lm <- lm(body_mass_g ~ flipper_length_mm + bill_length_mm + bill_depth_mm, data = penguins)
+
+# Look at the diagnostics! 
+ggnostic(penguin_lm)
+```
+
+### D. `ggtable()`: Nicely formatted counts tables
+
+```{r}
+# Counts, for each species, tallied by island & sex
+penguins %>% 
+  ggtable("species", c("island","sex"))
+```
+
+And much more! Check out {GGally} for more tools to explore and visualize your multivariate data!  
