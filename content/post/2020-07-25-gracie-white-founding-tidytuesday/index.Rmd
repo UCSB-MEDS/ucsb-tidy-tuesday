@@ -1,0 +1,46 @@
+---
+title: "Special guest post: UCSB TidyTuesday co-founder Gracie White (MESM 2020)"
+author: Gracie White
+date: '2020-07-25'
+subtitle: ''
+summary: 'Gracie shares her thoughts on founding and participating in UCSB TidyTuesdays.'
+categories:
+  - community
+tags:
+  - impact
+  - community
+---
+
+### About Gracie
+
+Gracie recently graduated with her Master of Environmental Science and Management degree from the Bren School (UCSB). She is passionate about sustainable aquaculture, an expert aerialist, and co-founded UCSB TidyTuesdays in 2018.
+
+---
+
+Hi Everyone! 
+
+I’m Gracie. I’m a recent graduate of the Bren School, and I am really passionate about sustainable aquaculture (aka, I’m a fish nerd). I also love visual story-telling: film-making, photography, graphic design, and even performance arts. So, when Allison introduced me to the world of data visualization with RStudio as part of the introductory data science course at Bren - I was hooked. 
+
+I looked forward to Allison’s class every week that fall and winter, especially the lab sections where we’d build up our coding skills. But then spring quarter came, and there were no more data classes. Cue panic. I felt like I had just really started to get comfortable coding and wrangling/visualizing data without having to check my notes for every line of code, and I didn’t want to let that slip. I knew my friends were feeling the same way. We had all come to grad school to learn practical tools to solve pressing environmental problems, and we had, but we also know that working with data would be something that required practice and continued learning (not to mention it seems like there’s a new awesome package to learn about every day!). 
+
+I also knew that grad school is very busy, and despite my best intentions, I was not going to consistently find time to sit down and just practice coding by myself. Not to mention, a lot of what made learning R so enjoyable was Allison and her incredibly encouraging and enthusiastic attitude towards all things data. She didn’t just teach us how to use R, she inspired curiosity. Curiosity to an extent that my twitter feed had transitioned from all memes all the time to essentially an Rstudio tips and tricks blog. And that’s where I first learned about #tidytuesday. 
+
+This simple twitter tradition was the perfect jumping-off point for a club! It lent itself to structure (a new dataset posted every week), creativity (visualize it in whatever way your imagination may take you), and a sense of community - both with graduate students attending the club, and the wider R/dataviz community online. And, it was an excuse to keep learning from Allison every week. I discussed the idea with Allison that week, and the club was born! 
+
+TidyTuesday has been an integral part of my grad school experience. I came into grad school really nervous about having to learn coding, and left having co-founded a coding club. No matter how busy I was with a variety of fish-related projects, I loved being able to dedicate a couple hours every week to just playing with data. I say playing, not practicing, because that’s really what it was. As there were no deadlines or rules attached to TidyTuesday, it allowed for greater experimentation, risk-taking, and randomness than a homework assignment ever would. As a result, I learned a lot. For example, I learned how to “put on a bird on it” (Portlandia fans will understand), and tried every single color palette package I could possibly find. 
+
+I was also really excited about the community that formed from the meetups. There quickly became a core group of TidyTuesday participants across multiple departments and organizations, and of an incredibly wide range in data skill levels. As a relative Rstudio newbie, I always knew that if I ever got stuck on a problem of how to achieve something in R, I could always bring it to TidyTuesday and get ample suggestions from the team. So not only was I continually learning from my personal visualization play, but I was also continually learning from other participants with incredible ideas and different perspectives. 
+
+While graduating this year was bittersweet, I know that whenever I want to brush up on my code or just listen and be inspired by what is possible with Rstudio, I can always come back to TidyTuesday.
+
+
+*Below: Gracie in a victorious coding moment at UCSB TidyTuesday - when she figured out how to put a bird on it.*
+<br> 
+
+<center>
+  <a><img src="featured_gracie_put_a_bird_on_it.png" width="600px"></a>
+</center>
+
+<br> 
+
+**Thank you for being our fearless co-founder, Gracie!**

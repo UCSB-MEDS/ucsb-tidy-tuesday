@@ -1,0 +1,95 @@
+---
+title: "Accessing IUCN redlist data via API by Gordon Blasco (NCEAS)"
+author: Gordon Blasco
+date: '2020-05-12'
+subtitle: ''
+summary: 'A demo on how to access and tidy IUCN redlist data using the API.'
+tags:
+  - how-to
+  - study-group
+  - impact
+---
+
+
+
+<div id="about-gordon" class="section level3">
+<h3>About Gordon</h3>
+<p>Gordon Blasco is a data analyst at the National Center for Ecological Analysis and Synthesis and a total R enthusiast. He works on trends in food systems and the mapping of human impacts on the marine environment.</p>
+<hr />
+</div>
+<div id="iucn-redlist-api-demo" class="section level3">
+<h3>IUCN Redlist API demo</h3>
+<p>In this session, I show how to use the IUCN’s redlists API to get the current conservation status for a number of species, using some help from the purrr package to keep it tidy.</p>
+<p><strong>Set-up to follow along:</strong></p>
+<p>To follow along, you’ll need to install the <code>rredlist</code> package in R: <code>install.packages("rredlist")</code></p>
+<p>You’ll also need this test API key:
+“9bb4facb6d23f48efbf424bb05c0c1ef1cf6f468393bc745d42179ac4aca5fee”</p>
+<p>Packages required: <code>rredlist</code> and <code>tidyverse</code></p>
+<pre class="r"><code>suppressMessages(library(rredlist))
+suppressMessages(library(tidyverse))</code></pre>
+</div>
+<div id="safety-first" class="section level3">
+<h3>Safety first!</h3>
+<p>API keys are sensitive and should not be saved in your R scripts if you are going to push them to github. Treat them like a password. To keep them safe, save them to your computer as “environmental variables” that can only be seen from your device. This is easy to do in R using the base r <code>Sys.setenv()</code> and <code>Sys.getenv()</code> functions.</p>
+<p>You can use <code>Sys.setenv()</code> to save a string as an environmental variable, meaning it will not be populated into your R environment, instead it will live in the environment of your computer’s hard drive. Once you set the system variable be sure to delete the line where you set the variable. You now can use the <code>Sys.getenv()</code> function to call that environmental variable. That variable will exist in your computer until you delete it using <code>Sys.unsetenv()</code>.</p>
+<pre class="r"><code># set your api key as an environmental variable so you do not upload
+Sys.setenv(IUCN_KEY = &quot;9bb4facb6d23f48efbf424bb05c0c1ef1cf6f468393bc745d42179ac4aca5fee&quot;)
+
+# now call the variable that you set
+Sys.getenv(&quot;IUCN_KEY&quot;)</code></pre>
+<pre><code>## [1] &quot;9bb4facb6d23f48efbf424bb05c0c1ef1cf6f468393bc745d42179ac4aca5fee&quot;</code></pre>
+<pre class="r"><code># if this returns the token key then you can delete the Sys.setenv line. This does not need to be in your code anymore,
+
+# and you can save that as a R variable 
+apikey &lt;- Sys.getenv(&quot;IUCN_KEY&quot;)</code></pre>
+<p>Now that we have a way to access the api and keep our precious api key is safe, lets look at what the api returns for the species Gorilla gorilla. To ping the API we will use the <code>rredlist::rl_search</code> to get the information for a given species.</p>
+<pre class="r"><code>test &lt;- rl_search(&quot;Gorilla gorilla&quot;, key = apikey)
+
+test</code></pre>
+<pre><code>## $name
+## [1] &quot;Gorilla gorilla&quot;
+## 
+## $result
+##   taxonid scientific_name  kingdom   phylum    class    order    family   genus
+## 1    9404 Gorilla gorilla ANIMALIA CHORDATA MAMMALIA PRIMATES HOMINIDAE Gorilla
+##   main_common_name      authority published_year assessment_date category
+## 1  Western Gorilla (Savage, 1847)           2018      2016-04-01       CR
+##   criteria population_trend marine_system freshwater_system terrestrial_system
+## 1   A4bcde       Decreasing         FALSE             FALSE               TRUE
+##                                      assessor                          reviewer
+## 1 Maisels, F., Bergl, R.A. &amp; Williamson, E.A. Mittermeier, R.A. &amp; Rylands, A.B.
+##   aoo_km2 eoo_km2 elevation_upper elevation_lower depth_upper depth_lower
+## 1      NA      NA            1900               0          NA          NA
+##   errata_flag errata_reason amended_flag
+## 1          NA            NA         TRUE
+##                                                                                                                                     amended_reason
+## 1 This amended version of the 2016 assessment was created to update population and reduction estimates based on Strindberg &lt;em&gt;et al&lt;/em&gt;. (2018).</code></pre>
+<p>So… this is a bit of a mess, but you can see the category column returning a “CR” for critically endangered (total bummer). Awful reminder of the biodiversity crisis aside, our code is working and we are able to pull the information we want from the IUCN. However, we can clean this workflow up a bit using the <code>purrr</code> package. Let’s use <code>purrr::map()</code> to iterate over a list of species, and <code>purrr::pluck()</code> to extract just the category and return it as a column.</p>
+<pre class="r"><code># make a data frame of the species you want to iterate over
+df &lt;- tribble(
+  ~species_names, 
+  &quot;Pan paniscus&quot;,
+  &quot;Gorilla gorilla&quot;,
+  &quot;Chiroxiphia linearis&quot;,
+  &quot;Lemur catta&quot;
+) %&gt;% # now apply the rl_search function to each species using purrr::map()
+  mutate(iucn_pull = map(species_names, rl_search, key = apikey)) 
+
+# if you look at the df object the iucn_pull column is a list with a lot of information that we are not interested in. So we can use purr::pluck to get the elements we want!
+
+# we will need to look at the list format to see what elements of the api we are interested in are named. In this case we want to go into the &quot;result&quot; list and pull out the value from &quot;category.&quot; 
+
+api_clean &lt;- df %&gt;% 
+  mutate(category = map_chr(iucn_pull, pluck, &quot;result&quot;, &quot;category&quot;)) %&gt;% 
+  select(species_names, category)
+
+api_clean</code></pre>
+<pre><code>## # A tibble: 4 x 2
+##   species_names        category
+##   &lt;chr&gt;                &lt;chr&gt;   
+## 1 Pan paniscus         EN      
+## 2 Gorilla gorilla      CR      
+## 3 Chiroxiphia linearis LC      
+## 4 Lemur catta          EN</code></pre>
+<p>There we go much cleaner. Thanks TidyTuesday crew!</p>
+</div>

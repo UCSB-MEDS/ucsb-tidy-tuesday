@@ -14,9 +14,9 @@
     
     <item>
       <title>{forcats} for factors by Allison Horst (Bren)</title>
-      <link>/post/2020-07-21-tidy-tuesday-coding-club/</link>
+      <link>/post/2020-07-21-forcats-demo/</link>
       <pubDate>Tue, 21 Jul 2020 00:00:00 +0000</pubDate>
-      <guid>/post/2020-07-21-tidy-tuesday-coding-club/</guid>
+      <guid>/post/2020-07-21-forcats-demo/</guid>
       <description>
 
 
@@ -193,9 +193,9 @@ levels(sw_lump_min$species)&lt;/code&gt;&lt;/pre&gt;
     
     <item>
       <title>Meet the {GGally} package by Allison Horst (Bren)</title>
-      <link>/post/2020-07-07-tidy-tuesday-coding-club/</link>
+      <link>/post/2020-07-07-ggally-demo/</link>
       <pubDate>Tue, 07 Jul 2020 00:00:00 +0000</pubDate>
-      <guid>/post/2020-07-07-tidy-tuesday-coding-club/</guid>
+      <guid>/post/2020-07-07-ggally-demo/</guid>
       <description>
 
 
@@ -416,19 +416,19 @@ skimr::skim(penguins)&lt;/code&gt;&lt;/pre&gt;
 &lt;h3&gt;A. &lt;code&gt;ggpairs()&lt;/code&gt;: a pair plot!&lt;/h3&gt;
 &lt;p&gt;Out of the box:&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;ggpairs(penguins)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/2020-07-07-tidy-tuesday-coding-club/index_files/figure-html/unnamed-chunk-3-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/post/2020-07-07-ggally-demo/index_files/figure-html/unnamed-chunk-3-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;That should make you go “What.” It’s cool but a bit much. We can specify what we want in our pairs plot, and map color onto a variable to separate groups.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;penguins %&amp;gt;% 
   select(species, bill_length_mm:body_mass_g) %&amp;gt;% 
   ggpairs(aes(color = species))&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/2020-07-07-tidy-tuesday-coding-club/index_files/figure-html/unnamed-chunk-4-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/post/2020-07-07-ggally-demo/index_files/figure-html/unnamed-chunk-4-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;/div&gt;
 &lt;div id=&#34;b.-ggbivariate-plot-outcome-variable-with-several-explanatory-variables&#34; class=&#34;section level3&#34;&gt;
 &lt;h3&gt;B. &lt;code&gt;ggbivariate()&lt;/code&gt;: plot outcome variable with several explanatory variables&lt;/h3&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;penguins %&amp;gt;% 
   ggbivariate(outcome = &amp;quot;body_mass_g&amp;quot;, 
               explanatory = c(&amp;quot;species&amp;quot;,&amp;quot;sex&amp;quot;, &amp;quot;island&amp;quot;,&amp;quot;flipper_length_mm&amp;quot;))&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/2020-07-07-tidy-tuesday-coding-club/index_files/figure-html/unnamed-chunk-5-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/post/2020-07-07-ggally-demo/index_files/figure-html/unnamed-chunk-5-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;An example with custom formatting:&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;penguins %&amp;gt;% 
   ggbivariate(outcome = &amp;quot;species&amp;quot;, 
@@ -441,7 +441,7 @@ skimr::skim(penguins)&lt;/code&gt;&lt;/pre&gt;
   )) +
   scale_fill_brewer(palette = 10) +
   theme_minimal()&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/2020-07-07-tidy-tuesday-coding-club/index_files/figure-html/unnamed-chunk-6-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/post/2020-07-07-ggally-demo/index_files/figure-html/unnamed-chunk-6-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;/div&gt;
 &lt;div id=&#34;c.-ggnostic-model-diagostics&#34; class=&#34;section level3&#34;&gt;
 &lt;h3&gt;C. &lt;code&gt;ggnostic()&lt;/code&gt;: Model diagostics&lt;/h3&gt;
@@ -450,14 +450,14 @@ penguin_lm &amp;lt;- lm(body_mass_g ~ flipper_length_mm + bill_length_mm + bill_
 
 # Look at the diagnostics! 
 ggnostic(penguin_lm)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/2020-07-07-tidy-tuesday-coding-club/index_files/figure-html/unnamed-chunk-7-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/post/2020-07-07-ggally-demo/index_files/figure-html/unnamed-chunk-7-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;/div&gt;
 &lt;div id=&#34;d.-ggtable-nicely-formatted-counts-tables&#34; class=&#34;section level3&#34;&gt;
 &lt;h3&gt;D. &lt;code&gt;ggtable()&lt;/code&gt;: Nicely formatted counts tables&lt;/h3&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Counts, for each species, tallied by island &amp;amp; sex
 penguins %&amp;gt;% 
   ggtable(&amp;quot;species&amp;quot;, c(&amp;quot;island&amp;quot;,&amp;quot;sex&amp;quot;))&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/2020-07-07-tidy-tuesday-coding-club/index_files/figure-html/unnamed-chunk-8-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/post/2020-07-07-ggally-demo/index_files/figure-html/unnamed-chunk-8-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;And much more! Check out {GGally} for more tools to explore and visualize your multivariate data!&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;

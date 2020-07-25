@@ -5,12 +5,104 @@
     <link>/tag/how-to/</link>
       <atom:link href="/tag/how-to/index.xml" rel="self" type="application/rss+xml" />
     <description>how-to</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Thu, 02 May 2019 00:00:00 +0000</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Tue, 12 May 2020 00:00:00 +0000</lastBuildDate>
     <image>
       <url>/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_512x512_fill_lanczos_center_2.png</url>
       <title>how-to</title>
       <link>/tag/how-to/</link>
     </image>
+    
+    <item>
+      <title>Accessing IUCN redlist data via API by Gordon Blasco (NCEAS)</title>
+      <link>/post/2020-05-12-gordon-blasco-api/</link>
+      <pubDate>Tue, 12 May 2020 00:00:00 +0000</pubDate>
+      <guid>/post/2020-05-12-gordon-blasco-api/</guid>
+      <description>
+
+
+&lt;div id=&#34;about-gordon&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;About Gordon&lt;/h3&gt;
+&lt;p&gt;Gordon Blasco is a data analyst at the National Center for Ecological Analysis and Synthesis and a total R enthusiast. He works on trends in food systems and the mapping of human impacts on the marine environment.&lt;/p&gt;
+&lt;hr /&gt;
+&lt;/div&gt;
+&lt;div id=&#34;iucn-redlist-api-demo&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;IUCN Redlist API demo&lt;/h3&gt;
+&lt;p&gt;In this session, I show how to use the IUCN’s redlists API to get the current conservation status for a number of species, using some help from the purrr package to keep it tidy.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Set-up to follow along:&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;To follow along, you’ll need to install the &lt;code&gt;rredlist&lt;/code&gt; package in R: &lt;code&gt;install.packages(&#34;rredlist&#34;)&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;You’ll also need this test API key:
+“9bb4facb6d23f48efbf424bb05c0c1ef1cf6f468393bc745d42179ac4aca5fee”&lt;/p&gt;
+&lt;p&gt;Packages required: &lt;code&gt;rredlist&lt;/code&gt; and &lt;code&gt;tidyverse&lt;/code&gt;&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;suppressMessages(library(rredlist))
+suppressMessages(library(tidyverse))&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div id=&#34;safety-first&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Safety first!&lt;/h3&gt;
+&lt;p&gt;API keys are sensitive and should not be saved in your R scripts if you are going to push them to github. Treat them like a password. To keep them safe, save them to your computer as “environmental variables” that can only be seen from your device. This is easy to do in R using the base r &lt;code&gt;Sys.setenv()&lt;/code&gt; and &lt;code&gt;Sys.getenv()&lt;/code&gt; functions.&lt;/p&gt;
+&lt;p&gt;You can use &lt;code&gt;Sys.setenv()&lt;/code&gt; to save a string as an environmental variable, meaning it will not be populated into your R environment, instead it will live in the environment of your computer’s hard drive. Once you set the system variable be sure to delete the line where you set the variable. You now can use the &lt;code&gt;Sys.getenv()&lt;/code&gt; function to call that environmental variable. That variable will exist in your computer until you delete it using &lt;code&gt;Sys.unsetenv()&lt;/code&gt;.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# set your api key as an environmental variable so you do not upload
+Sys.setenv(IUCN_KEY = &amp;quot;9bb4facb6d23f48efbf424bb05c0c1ef1cf6f468393bc745d42179ac4aca5fee&amp;quot;)
+
+# now call the variable that you set
+Sys.getenv(&amp;quot;IUCN_KEY&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## [1] &amp;quot;9bb4facb6d23f48efbf424bb05c0c1ef1cf6f468393bc745d42179ac4aca5fee&amp;quot;&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# if this returns the token key then you can delete the Sys.setenv line. This does not need to be in your code anymore,
+
+# and you can save that as a R variable 
+apikey &amp;lt;- Sys.getenv(&amp;quot;IUCN_KEY&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Now that we have a way to access the api and keep our precious api key is safe, lets look at what the api returns for the species Gorilla gorilla. To ping the API we will use the &lt;code&gt;rredlist::rl_search&lt;/code&gt; to get the information for a given species.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;test &amp;lt;- rl_search(&amp;quot;Gorilla gorilla&amp;quot;, key = apikey)
+
+test&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## $name
+## [1] &amp;quot;Gorilla gorilla&amp;quot;
+## 
+## $result
+##   taxonid scientific_name  kingdom   phylum    class    order    family   genus
+## 1    9404 Gorilla gorilla ANIMALIA CHORDATA MAMMALIA PRIMATES HOMINIDAE Gorilla
+##   main_common_name      authority published_year assessment_date category
+## 1  Western Gorilla (Savage, 1847)           2018      2016-04-01       CR
+##   criteria population_trend marine_system freshwater_system terrestrial_system
+## 1   A4bcde       Decreasing         FALSE             FALSE               TRUE
+##                                      assessor                          reviewer
+## 1 Maisels, F., Bergl, R.A. &amp;amp; Williamson, E.A. Mittermeier, R.A. &amp;amp; Rylands, A.B.
+##   aoo_km2 eoo_km2 elevation_upper elevation_lower depth_upper depth_lower
+## 1      NA      NA            1900               0          NA          NA
+##   errata_flag errata_reason amended_flag
+## 1          NA            NA         TRUE
+##                                                                                                                                     amended_reason
+## 1 This amended version of the 2016 assessment was created to update population and reduction estimates based on Strindberg &amp;lt;em&amp;gt;et al&amp;lt;/em&amp;gt;. (2018).&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;So… this is a bit of a mess, but you can see the category column returning a “CR” for critically endangered (total bummer). Awful reminder of the biodiversity crisis aside, our code is working and we are able to pull the information we want from the IUCN. However, we can clean this workflow up a bit using the &lt;code&gt;purrr&lt;/code&gt; package. Let’s use &lt;code&gt;purrr::map()&lt;/code&gt; to iterate over a list of species, and &lt;code&gt;purrr::pluck()&lt;/code&gt; to extract just the category and return it as a column.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# make a data frame of the species you want to iterate over
+df &amp;lt;- tribble(
+  ~species_names, 
+  &amp;quot;Pan paniscus&amp;quot;,
+  &amp;quot;Gorilla gorilla&amp;quot;,
+  &amp;quot;Chiroxiphia linearis&amp;quot;,
+  &amp;quot;Lemur catta&amp;quot;
+) %&amp;gt;% # now apply the rl_search function to each species using purrr::map()
+  mutate(iucn_pull = map(species_names, rl_search, key = apikey)) 
+
+# if you look at the df object the iucn_pull column is a list with a lot of information that we are not interested in. So we can use purr::pluck to get the elements we want!
+
+# we will need to look at the list format to see what elements of the api we are interested in are named. In this case we want to go into the &amp;quot;result&amp;quot; list and pull out the value from &amp;quot;category.&amp;quot; 
+
+api_clean &amp;lt;- df %&amp;gt;% 
+  mutate(category = map_chr(iucn_pull, pluck, &amp;quot;result&amp;quot;, &amp;quot;category&amp;quot;)) %&amp;gt;% 
+  select(species_names, category)
+
+api_clean&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## # A tibble: 4 x 2
+##   species_names        category
+##   &amp;lt;chr&amp;gt;                &amp;lt;chr&amp;gt;   
+## 1 Pan paniscus         EN      
+## 2 Gorilla gorilla      CR      
+## 3 Chiroxiphia linearis LC      
+## 4 Lemur catta          EN&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;There we go much cleaner. Thanks TidyTuesday crew!&lt;/p&gt;
+&lt;/div&gt;
+</description>
+    </item>
     
     <item>
       <title>Starting our UCSB #tidytuesday coding club</title>

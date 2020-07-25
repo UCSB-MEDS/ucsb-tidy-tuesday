@@ -33,6 +33,41 @@
   </url>
   
   <url>
+    <loc>/categories/</loc>
+    <lastmod>2020-07-25T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tag/community/</loc>
+    <lastmod>2020-07-25T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/category/community/</loc>
+    <lastmod>2020-07-25T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tag/impact/</loc>
+    <lastmod>2020-07-25T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/post/</loc>
+    <lastmod>2020-07-25T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/post/2020-07-25-gracie-white-founding-tidytuesday/</loc>
+    <lastmod>2020-07-25T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/</loc>
+    <lastmod>2020-07-25T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>/tag/coding-demo/</loc>
     <lastmod>2020-07-21T00:00:00+00:00</lastmod>
   </url>
@@ -43,22 +78,12 @@
   </url>
   
   <url>
-    <loc>/post/</loc>
-    <lastmod>2020-07-21T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
     <loc>/tag/study-group/</loc>
     <lastmod>2020-07-21T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/tags/</loc>
-    <lastmod>2020-07-21T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/post/2020-07-21-tidy-tuesday-coding-club/</loc>
+    <loc>/post/2020-07-21-forcats-demo/</loc>
     <lastmod>2020-07-21T00:00:00+00:00</lastmod>
   </url>
   
@@ -68,8 +93,18 @@
   </url>
   
   <url>
-    <loc>/post/2020-07-07-tidy-tuesday-coding-club/</loc>
+    <loc>/post/2020-07-07-ggally-demo/</loc>
     <lastmod>2020-07-07T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/post/2020-05-12-gordon-blasco-api/</loc>
+    <lastmod>2020-05-12T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tag/how-to/</loc>
+    <lastmod>2020-05-12T00:00:00+00:00</lastmod>
   </url>
   
   <url>
@@ -78,27 +113,7 @@
   </url>
   
   <url>
-    <loc>/categories/</loc>
-    <lastmod>2019-05-02T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
     <loc>/category/champions/</loc>
-    <lastmod>2019-05-02T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/category/community/</loc>
-    <lastmod>2019-05-02T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tag/how-to/</loc>
-    <lastmod>2019-05-02T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tag/impact/</loc>
     <lastmod>2019-05-02T00:00:00+00:00</lastmod>
   </url>
   

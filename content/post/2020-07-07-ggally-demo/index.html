@@ -229,19 +229,19 @@ skimr::skim(penguins)</code></pre>
 <h3>A. <code>ggpairs()</code>: a pair plot!</h3>
 <p>Out of the box:</p>
 <pre class="r"><code>ggpairs(penguins)</code></pre>
-<p><img src="/post/2020-07-07-tidy-tuesday-coding-club/index_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+<p><img src="/post/2020-07-07-ggally-demo/index_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
 <p>That should make you go “What.” It’s cool but a bit much. We can specify what we want in our pairs plot, and map color onto a variable to separate groups.</p>
 <pre class="r"><code>penguins %&gt;% 
   select(species, bill_length_mm:body_mass_g) %&gt;% 
   ggpairs(aes(color = species))</code></pre>
-<p><img src="/post/2020-07-07-tidy-tuesday-coding-club/index_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+<p><img src="/post/2020-07-07-ggally-demo/index_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
 </div>
 <div id="b.-ggbivariate-plot-outcome-variable-with-several-explanatory-variables" class="section level3">
 <h3>B. <code>ggbivariate()</code>: plot outcome variable with several explanatory variables</h3>
 <pre class="r"><code>penguins %&gt;% 
   ggbivariate(outcome = &quot;body_mass_g&quot;, 
               explanatory = c(&quot;species&quot;,&quot;sex&quot;, &quot;island&quot;,&quot;flipper_length_mm&quot;))</code></pre>
-<p><img src="/post/2020-07-07-tidy-tuesday-coding-club/index_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<p><img src="/post/2020-07-07-ggally-demo/index_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
 <p>An example with custom formatting:</p>
 <pre class="r"><code>penguins %&gt;% 
   ggbivariate(outcome = &quot;species&quot;, 
@@ -254,7 +254,7 @@ skimr::skim(penguins)</code></pre>
   )) +
   scale_fill_brewer(palette = 10) +
   theme_minimal()</code></pre>
-<p><img src="/post/2020-07-07-tidy-tuesday-coding-club/index_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<p><img src="/post/2020-07-07-ggally-demo/index_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
 </div>
 <div id="c.-ggnostic-model-diagostics" class="section level3">
 <h3>C. <code>ggnostic()</code>: Model diagostics</h3>
@@ -263,14 +263,14 @@ penguin_lm &lt;- lm(body_mass_g ~ flipper_length_mm + bill_length_mm + bill_dept
 
 # Look at the diagnostics! 
 ggnostic(penguin_lm)</code></pre>
-<p><img src="/post/2020-07-07-tidy-tuesday-coding-club/index_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+<p><img src="/post/2020-07-07-ggally-demo/index_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
 </div>
 <div id="d.-ggtable-nicely-formatted-counts-tables" class="section level3">
 <h3>D. <code>ggtable()</code>: Nicely formatted counts tables</h3>
 <pre class="r"><code># Counts, for each species, tallied by island &amp; sex
 penguins %&gt;% 
   ggtable(&quot;species&quot;, c(&quot;island&quot;,&quot;sex&quot;))</code></pre>
-<p><img src="/post/2020-07-07-tidy-tuesday-coding-club/index_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+<p><img src="/post/2020-07-07-ggally-demo/index_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
 <p>And much more! Check out {GGally} for more tools to explore and visualize your multivariate data!</p>
 </div>
 </div>
