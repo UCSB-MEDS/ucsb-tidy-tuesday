@@ -39,7 +39,7 @@
 
 .fa, .fas {
     font-weight: 900;
-    color: #1D9C9A;
+    color: #629895;
 }
 
 #navbar-main .main-menu-item ul li .nav-link {
@@ -92,21 +92,23 @@ h1 {
 }
 
 h2 {
-  color: #1D9C9A;
+  color: #629895;
   font-family: 'Hind', serif;
   font-size: 16;
 }
 
 h3 {
-  color: #1D9C9A;
+  color: #629895;
   font-family: 'Hind', serif;
   font-size: 14;
+  font-weight: 400;
 }
 
 h4 {
-  color: #1D9C9A;
+  color: #629895;
   font-family: 'Hind', serif;
   font-size: 12;
+  font-weight: 400;
 }
 
 /*------- Hyperlinks -------*/
@@ -116,12 +118,12 @@ a {
 }
 
 a:hover, a:focus {
-    color: #1D9C9A;
+    color: #629895;
 }
 
 /*------- Post title -------*/
 h3.article-title a:hover {
-    color: #1D9C9A;
+    color: #629895;
     text-decoration: none;
     transition: color 0.6s ease;
 }
@@ -129,6 +131,7 @@ h3.article-title a:hover {
 .article-title a {
     color: #696d7d;
     transition: color 0.6s ease;
+    font-weight: 400;
 }
 
 /*------ Ordered interests lists formatting -------*/
