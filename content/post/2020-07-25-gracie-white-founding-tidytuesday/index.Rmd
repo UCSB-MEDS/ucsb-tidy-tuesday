@@ -3,7 +3,7 @@ title: "Special guest post: UCSB TidyTuesday co-founder Gracie White (MESM 2020)
 author: Gracie White
 date: '2020-07-25'
 subtitle: ''
-summary: 'Gracie shares her thoughts on founding and participating in UCSB TidyTuesdays.'
+summary: 'Gracie shares her thoughts on founding, leading, and participating in UCSB TidyTuesdays.'
 categories:
   - community
 tags:

@@ -20,16 +20,21 @@
     left: 0;
     z-index: 1030;
     padding: 0 1rem;
-    color: #faf3dd;
+    color: white;
+}
+
+.nav-item {
+    position: relative;
+    padding-left: 20px;
 }
 
 .navbar-light .navbar-brand {
     font-family: 'Hind';
-    color: #8fc0a9;
+    color: white;
 }
 
 .navbar-light .navbar-brand:hover, .navbar-light .navbar-brand:focus {
-    color: #c8d5b9;
+    color: white;
 }
 
 .fa, .fas {
@@ -38,7 +43,7 @@
 }
 
 #navbar-main .main-menu-item ul li .nav-link {
-    color: #c8d5b9;
+    color: white;
     font-family: 'Hind';
     background: #525666;
 }
@@ -46,7 +51,8 @@
 .navbar .navbar-nav .nav-link.active {
     font-family: 'Hind';
     font-weight: bold !important;
-    color: #c8d5b9 !important;
+    color: white !important;
+    text-decoration: underline;
 }
 
 /*-------- Avatar title --------*/
