@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Gadget &amp; Gizmo | UCSB TidyTuesday</title>
+    <link>/author/gadget-gizmo/</link>
+      <atom:link href="/author/gadget-gizmo/index.xml" rel="self" type="application/rss+xml" />
+    <description>Gadget &amp; Gizmo</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language>
+    <image>
+      <url>/images/icon_hu1d03f9545f374a2651534f10692906eb_13568_512x512_fill_lanczos_center_2.png</url>
+      <title>Gadget &amp; Gizmo</title>
+      <link>/author/gadget-gizmo/</link>
+    </image>
+    
+  </channel>
+</rss>
